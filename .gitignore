@@ -1,0 +1,14 @@
+target/
+generated-java/
+test-output/
+bin/
+*.jsfdia
+*.log
+
+.idea
+*.iml
+*.iws
+
+.DS_Store
+*.swp
+
