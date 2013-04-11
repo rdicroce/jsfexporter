@@ -17,8 +17,9 @@ import javax.faces.event.ActionListener;
 
 import org.primefaces.util.Constants;
 
+import com.lapis.pfexporter.api.IExportType;
 import com.lapis.pfexporter.spi.IExportSource;
-import com.lapis.pfexporter.spi.IExportType;
+import com.lapis.pfexporter.spi.IExportTypeFactory;
 
 public class DataExporter implements ActionListener, StateHolder {
 
@@ -106,27 +107,27 @@ public class DataExporter implements ActionListener, StateHolder {
 			sourceOptionsValue = (CS) sourceOptions.getValue(elContext);
 		}
 		
-		// get the export type and retrieve file options
+		// get the export type factory and retrieve file options
 		String fileTypeValue = (String) fileType.getValue(elContext);
-		IExportType<TT, CT> exportType = (IExportType<TT, CT>) ExportTypeFactory.getExportFormat(facesContext, fileTypeValue);
+		IExportTypeFactory<TT, CT> exportTypeFactory = (IExportTypeFactory<TT, CT>) ExportTypeFactoryFactory.getExportType(facesContext, fileTypeValue);
 		CT fileOptionsValue;
 		if (fileOptions == null) { // file options are not mandatory; get the defaults if not set
-			fileOptionsValue = exportType.getDefaultConfigOptions();
+			fileOptionsValue = exportTypeFactory.getDefaultConfigOptions();
 		} else {
 			fileOptionsValue = (CT) fileOptions.getValue(elContext);
 		}
 		
-		// create a new export context and invoke the pre-processor if there is one
-		TT exportContext = exportType.createNewContext(fileOptionsValue);
+		// create a new exporter
+		IExportType<TT, CT> exportType = exportTypeFactory.createNewExporter(fileOptionsValue);
+		TT exportContext = exportType.getContext();
+		
+		// invoke the pre-processor if there is one
 		if (preProcessor != null) {
 			preProcessor.invoke(elContext, new Object[]{exportContext});
 		}
 		
 		// generate the export
-		exportType.generateExport(
-				exportContext,
-				fileOptionsValue,
-				exportSource.exportData(sourceComponent, sourceOptionsValue, facesContext));
+		exportSource.exportData(sourceComponent, sourceOptionsValue, exportType, facesContext);
 		
 		// invoke the post-processor if there is one
 		if (postProcessor != null) {
@@ -135,7 +136,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		
 		// configure response meta-data
 		externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
-		externalContext.setResponseContentType(exportType.getContentType());
+		externalContext.setResponseContentType(exportTypeFactory.getContentType());
 		externalContext.setResponseHeader("Expires", "0");
 		externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
 		externalContext.setResponseHeader("Pragma", "public");
@@ -148,7 +149,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"; filename*=UTF8''" + encodedFileName);
 		
 		// write the response and signal JSF that we're done
-		exportType.writeExport(exportContext, fileOptionsValue, externalContext);
+		exportType.writeExport(externalContext);
 		facesContext.responseComplete();
 	}
 

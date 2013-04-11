@@ -12,7 +12,10 @@
 			</p:commandButton>
 		
 			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}">
-				<p:column headerText="Make">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Make" />
+					</f:facet>
 					<h:outputText value="#{car.make}" />
 				</p:column>
 				<p:column headerText="Color">
