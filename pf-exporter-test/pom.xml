@@ -20,11 +20,15 @@
 		
 		<dependency>
 			<groupId>com.lapis.pfexporter</groupId>
+			<artifactId>pf-exporter-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lapis.pfexporter</groupId>
 			<artifactId>csv-exporter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.lapis.pfexporter</groupId>
-			<artifactId>pf-exporter-core</artifactId>
+			<artifactId>xml-exporter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>

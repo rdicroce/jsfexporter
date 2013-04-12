@@ -13,6 +13,7 @@
 	<modules>
 		<module>../pf-exporter-core</module>
 		<module>../csv-exporter</module>
+		<module>../xml-exporter</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -25,6 +26,11 @@
 			<dependency>
 				<groupId>com.lapis.pfexporter</groupId>
 				<artifactId>csv-exporter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lapis.pfexporter</groupId>
+				<artifactId>xml-exporter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -52,6 +58,11 @@
 				<groupId>net.sf.opencsv</groupId>
 				<artifactId>opencsv</artifactId>
 				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom2</artifactId>
+				<version>2.0.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.primefaces</groupId>

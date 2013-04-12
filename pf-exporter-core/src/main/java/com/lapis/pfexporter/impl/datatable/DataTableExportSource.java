@@ -13,6 +13,7 @@ import org.primefaces.component.datatable.DataTable;
 
 import com.lapis.pfexporter.api.FacetType;
 import com.lapis.pfexporter.api.IExportType;
+import com.lapis.pfexporter.api.IHierarchicalExportType;
 import com.lapis.pfexporter.api.ITabularExportType;
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions;
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions.ExportRange;
@@ -21,21 +22,6 @@ import com.lapis.pfexporter.impl.ValueFormatterUtil;
 import com.lapis.pfexporter.spi.IExportSource;
 
 public class DataTableExportSource implements IExportSource<DataTable, DataTableExportOptions> {
-
-	/*@Override
-	public IDataProvider exportData(DataTable source, DataTableExportOptions configOptions, FacesContext context) {
-		if (configOptions.getRange() == ExportRange.ALL) {
-			if (source.isLazy()) {
-				// TODO implement
-			} else {
-				return new AllRowsNonLazyDataProvider(source, context);
-			}
-		} else { // PAGE_ONLY
-			// TODO implement
-		}
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	@Override
 	public Class<DataTable> getSourceType() {
@@ -49,14 +35,6 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 
 	@Override
 	public void exportData(DataTable source, DataTableExportOptions configOptions, IExportType<?, ?> exporter, FacesContext context) throws Exception {
-		if (exporter instanceof ITabularExportType) {
-			doTabularExport(source, configOptions, (ITabularExportType<?, ?>) exporter, context);
-		} else {
-			throw new IllegalArgumentException(getClass().getSimpleName() + " does not support exporters of type " + exporter.getClass().getName());
-		}
-	}
-	
-	private void doTabularExport(DataTable source, DataTableExportOptions configOptions, ITabularExportType<?, ?> exporter, FacesContext context) {
 		List<UIColumn> columns = new ArrayList<UIColumn>(source.getColumns());
 		for (Iterator<UIColumn> columnIter = columns.iterator(); columnIter.hasNext();) {
 			UIColumn column = columnIter.next();
@@ -65,20 +43,20 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 			}
 		}
 		
+		if (exporter instanceof ITabularExportType) {
+			doTabularExport(source, columns, configOptions, (ITabularExportType<?, ?>) exporter, context);
+		} else if (exporter instanceof IHierarchicalExportType) {
+			doHierarchicalExport(source, columns, configOptions, (IHierarchicalExportType<?, ?>) exporter, context);
+		} else {
+			throw new IllegalArgumentException(getClass().getSimpleName() + " does not support exporters of type " + exporter.getClass().getName());
+		}
+	}
+	
+	private void doTabularExport(DataTable source, List<UIColumn> columns, DataTableExportOptions configOptions, ITabularExportType<?, ?> exporter, FacesContext context) {
 		boolean hasHeaders = false;
 		List<String> headers = new ArrayList<String>();
 		for (UIColumn column : columns) {
-			if (column instanceof DynamicColumn) {
-				((DynamicColumn) column).applyModel();
-			}
-			
-			String headerText = column.getHeaderText();
-			if (headerText == null) {
-				UIComponent header = column.getFacet(FacetType.HEADER.getFacetName());
-				if (header != null) {
-					headerText = ValueFormatterUtil.transformComponentsToString(context, header);
-				}
-			}
+			String headerText = getColumnHeaderText(column, context);
 			if (headerText != null) {
 				hasHeaders = true;
 			}
@@ -111,6 +89,42 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		} else { // PAGE_ONLY
 			// TODO implement
 		}
+	}
+	
+	private void doHierarchicalExport(DataTable source, List<UIColumn> columns, DataTableExportOptions configOptions, IHierarchicalExportType<?, ?> exporter, FacesContext context) {
+		if (configOptions.getRange() == ExportRange.ALL) {
+			if (source.isLazy()) {
+				// TODO implement
+			} else {
+				for (int i = 0; i < source.getRowCount(); i++) {
+					source.setRowIndex(i);
+					exporter.enterChild(source.getVar());
+					
+					for (UIColumn column : columns) {
+						if (column instanceof DynamicColumn) {
+							((DynamicColumn) column).applyModel();
+						}
+						
+						exporter.exportValue(getColumnHeaderText(column, context), ValueFormatterUtil.transformComponentsToString(context, column.getChildren()));
+					}
+					
+					exporter.exitChild();
+				}
+			}
+		} else { // PAGE_ONLY
+			// TODO implement
+		}
+	}
+	
+	private String getColumnHeaderText(UIColumn column, FacesContext context) {
+		String headerText = column.getHeaderText();
+		if (headerText == null) {
+			UIComponent header = column.getFacet(FacetType.HEADER.getFacetName());
+			if (header != null) {
+				headerText = ValueFormatterUtil.transformComponentsToString(context, header);
+			}
+		}
+		return headerText;
 	}
 
 }
