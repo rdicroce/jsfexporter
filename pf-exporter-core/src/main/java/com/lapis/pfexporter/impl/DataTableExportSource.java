@@ -1,10 +1,9 @@
-package com.lapis.pfexporter.impl.datatable;
+package com.lapis.pfexporter.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.api.DynamicColumn;
@@ -17,9 +16,8 @@ import com.lapis.pfexporter.api.IHierarchicalExportType;
 import com.lapis.pfexporter.api.ITabularExportType;
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions;
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions.ExportRange;
-import com.lapis.pfexporter.impl.TableCellImpl;
-import com.lapis.pfexporter.impl.ValueFormatterUtil;
 import com.lapis.pfexporter.spi.IExportSource;
+import com.lapis.pfexporter.util.ExportUtil;
 
 public class DataTableExportSource implements IExportSource<DataTable, DataTableExportOptions> {
 
@@ -56,7 +54,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		boolean hasHeaders = false;
 		List<String> headers = new ArrayList<String>();
 		for (UIColumn column : columns) {
-			String headerText = getColumnHeaderText(column, context);
+			String headerText = ExportUtil.getColumnHeaderText(column, context);
 			if (headerText != null) {
 				hasHeaders = true;
 			}
@@ -80,7 +78,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 						if (column instanceof DynamicColumn) {
 							((DynamicColumn) column).applyModel();
 						}
-						exporter.exportCell(new TableCellImpl(ValueFormatterUtil.transformComponentsToString(context, column.getChildren()), 1, 1, null));
+						exporter.exportCell(new TableCellImpl(ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1, null));
 					}
 					
 					exporter.rowComplete();
@@ -105,7 +103,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 							((DynamicColumn) column).applyModel();
 						}
 						
-						exporter.exportValue(getColumnHeaderText(column, context), ValueFormatterUtil.transformComponentsToString(context, column.getChildren()));
+						exporter.exportValue(ExportUtil.getColumnHeaderText(column, context), ExportUtil.transformComponentsToString(context, column.getChildren()));
 					}
 					
 					exporter.exitChild();
@@ -114,17 +112,6 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		} else { // PAGE_ONLY
 			// TODO implement
 		}
-	}
-	
-	private String getColumnHeaderText(UIColumn column, FacesContext context) {
-		String headerText = column.getHeaderText();
-		if (headerText == null) {
-			UIComponent header = column.getFacet(FacetType.HEADER.getFacetName());
-			if (header != null) {
-				headerText = ValueFormatterUtil.transformComponentsToString(context, header);
-			}
-		}
-		return headerText;
 	}
 
 }

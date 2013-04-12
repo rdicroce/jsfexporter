@@ -1,1 +1,2 @@
-com.lapis.pfexporter.impl.datatable.DataTableExportSource
+com.lapis.pfexporter.impl.DataTableExportSource
+com.lapis.pfexporter.impl.TreeTableExportSource
