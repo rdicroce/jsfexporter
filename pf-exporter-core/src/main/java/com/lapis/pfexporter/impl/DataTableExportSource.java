@@ -68,49 +68,61 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		}
 		
 		if (configOptions.getRange() == ExportRange.ALL) {
+			int first = source.getFirst();
 			if (source.isLazy()) {
 				// TODO implement
 			} else {
-				for (int i = 0; i < source.getRowCount(); i++) {
-					source.setRowIndex(i);
-					
-					for (UIColumn column : columns) {
-						if (column instanceof DynamicColumn) {
-							((DynamicColumn) column).applyModel();
-						}
-						exporter.exportCell(new TableCellImpl(ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1, null));
-					}
-					
-					exporter.rowComplete();
-				}
+				exportTabularRow(source, columns, 0, source.getRowCount(), exporter, context);
+				source.setFirst(first);
 			}
 		} else { // PAGE_ONLY
-			// TODO implement
+			exportTabularRow(source, columns, source.getFirst(), source.getFirst() + source.getRows(), exporter, context);
+		}
+	}
+	
+	private void exportTabularRow(DataTable source, List<UIColumn> columns, int startingRow, int endingRow, ITabularExportType<?, ?> exporter, FacesContext context) {
+		for (int i = startingRow; i < endingRow; i++) {
+			source.setRowIndex(i);
+			
+			for (UIColumn column : columns) {
+				if (column instanceof DynamicColumn) {
+					((DynamicColumn) column).applyModel();
+				}
+				exporter.exportCell(new TableCellImpl(ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1, null));
+			}
+			
+			exporter.rowComplete();
 		}
 	}
 	
 	private void doHierarchicalExport(DataTable source, List<UIColumn> columns, DataTableExportOptions configOptions, IHierarchicalExportType<?, ?> exporter, FacesContext context) {
 		if (configOptions.getRange() == ExportRange.ALL) {
+			int first = source.getFirst();
 			if (source.isLazy()) {
 				// TODO implement
 			} else {
-				for (int i = 0; i < source.getRowCount(); i++) {
-					source.setRowIndex(i);
-					exporter.enterChild(source.getVar());
-					
-					for (UIColumn column : columns) {
-						if (column instanceof DynamicColumn) {
-							((DynamicColumn) column).applyModel();
-						}
-						
-						exporter.exportValue(ExportUtil.getColumnHeaderText(column, context), ExportUtil.transformComponentsToString(context, column.getChildren()));
-					}
-					
-					exporter.exitChild();
-				}
+				exportHierarchicalRow(source, columns, 0, source.getRowCount(), exporter, context);
+				source.setFirst(first);
 			}
 		} else { // PAGE_ONLY
-			// TODO implement
+			exportHierarchicalRow(source, columns, source.getFirst(), source.getFirst() + source.getRows(), exporter, context);
+		}
+	}
+	
+	private void exportHierarchicalRow(DataTable source, List<UIColumn> columns, int startingRow, int endingRow, IHierarchicalExportType<?, ?> exporter, FacesContext context) {
+		for (int i = startingRow; i < endingRow; i++) {
+			source.setRowIndex(i);
+			exporter.enterChild(source.getVar());
+			
+			for (UIColumn column : columns) {
+				if (column instanceof DynamicColumn) {
+					((DynamicColumn) column).applyModel();
+				}
+				
+				exporter.exportValue(ExportUtil.getColumnHeaderText(column, context), ExportUtil.transformComponentsToString(context, column.getChildren()));
+			}
+			
+			exporter.exitChild();
 		}
 	}
 

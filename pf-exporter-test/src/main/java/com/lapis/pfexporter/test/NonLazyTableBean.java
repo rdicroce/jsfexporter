@@ -9,6 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.lapis.pfexporter.api.datatable.DataTableExportOptions;
+import com.lapis.pfexporter.api.datatable.DataTableExportOptions.ExportRange;
+
 @ManagedBean
 @ViewScoped
 public class NonLazyTableBean {
@@ -28,6 +31,10 @@ public class NonLazyTableBean {
 		for (int i = 0; i < 10; i++) {
 			cars.add(new Car(MAKES[rng.nextInt(10)], COLORS[rng.nextInt(10)], 1970 + rng.nextInt(43), new BigDecimal(rng.nextInt(100000))));
 		}
+	}
+	
+	public DataTableExportOptions getDTPageOnly() {
+		return new DataTableExportOptions(ExportRange.PAGE_ONLY);
 	}
 
 	public List<Car> getCars() {
