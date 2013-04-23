@@ -7,9 +7,11 @@ import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-import com.lapis.pfexporter.api.IHierarchicalExportType;
+import com.lapis.pfexporter.api.IExportCell;
+import com.lapis.pfexporter.api.IExportRow;
+import com.lapis.pfexporter.api.IExportType;
 
-public class XMLExportType implements IHierarchicalExportType<Document, Void> {
+public class XMLExportType implements IExportType<Document, Void, Element> {
 
 	// !|"|#|\$|%|&|'|\(|\)|\*|\+|,|/|;|<|=|>|\?|@|\[|\\|\]|\^|`|\{|\||\}|~|\s
 	private static final String ILLEGAL_CHARACTER_REGEX = "!|\"|#|\\$|%|&|'|\\(|\\)|\\*|\\+|,|/|;|<|=|>|\\?|@|\\[|\\\\|\\]|\\^|`|\\{|\\||\\}|~|\\s";
@@ -17,11 +19,11 @@ public class XMLExportType implements IHierarchicalExportType<Document, Void> {
 	private static final String ILLEGAL_START_REGEX = "^(-|\\.|\\d).*";
 	
 	private Document document;
-	private Element currentElement;
+	private Element rootElement;
 	
 	public XMLExportType() {
-		currentElement = new Element("export");
-		document = new Document(currentElement);
+		rootElement = new Element("export");
+		document = new Document(rootElement);
 	}
 	
 	@Override
@@ -34,24 +36,42 @@ public class XMLExportType implements IHierarchicalExportType<Document, Void> {
 		externalContext.setResponseCharacterEncoding("UTF-8");
 		new XMLOutputter(Format.getPrettyFormat()).output(document, externalContext.getResponseOutputStream());
 	}
-
+	
 	@Override
-	public void enterChild(String name) {
-		Element child = new Element(cleanElementName(name));
-		currentElement.addContent(child);
-		currentElement = child;
-	}
-
-	@Override
-	public void exportValue(String name, String value) {
-		Element child = new Element(cleanElementName(name));
-		child.setText(value);
-		currentElement.addContent(child);
-	}
-
-	@Override
-	public void exitChild() {
-		currentElement = currentElement.getParentElement();
+	public Element exportRow(IExportRow row) {
+		Element currentElement = (Element) row.getParentRowId();
+		if (currentElement == null) {
+			currentElement = rootElement;
+		}
+		
+		for (String namePart : row.getName()) {
+			Element subElement = new Element(cleanElementName(namePart));
+			currentElement.addContent(subElement);
+			currentElement = subElement;
+		}
+		
+		for (IExportCell cell : row.getCells()) {
+			Element cellElement = currentElement;
+			for (String namePart : cell.getName()) {
+				Element subElement = cellElement.getChild(namePart);
+				if (subElement == null) {
+					subElement = new Element(cleanElementName(namePart));
+					cellElement.addContent(subElement);
+				}
+				cellElement = subElement;
+			}
+			
+			if (!cellElement.getText().equals("")) {
+				String cellName = cellElement.getName();
+				cellElement = cellElement.getParentElement();
+				Element newCellElement = new Element(cellName);
+				cellElement.addContent(newCellElement);
+				cellElement = newCellElement;
+			}
+			cellElement.setText(cell.getValue());
+		}
+		
+		return currentElement;
 	}
 	
 	/**

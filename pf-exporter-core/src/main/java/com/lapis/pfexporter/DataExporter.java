@@ -109,7 +109,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		
 		// get the export type factory and retrieve file options
 		String fileTypeValue = (String) fileType.getValue(elContext);
-		IExportTypeFactory<TT, CT> exportTypeFactory = (IExportTypeFactory<TT, CT>) ExportTypeFactoryFactory.getExportType(facesContext, fileTypeValue);
+		IExportTypeFactory<TT, CT, ?> exportTypeFactory = (IExportTypeFactory<TT, CT, ?>) ExportTypeFactoryFactory.getExportType(facesContext, fileTypeValue);
 		CT fileOptionsValue;
 		if (fileOptions == null) { // file options are not mandatory; get the defaults if not set
 			fileOptionsValue = exportTypeFactory.getDefaultConfigOptions();
@@ -118,7 +118,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		}
 		
 		// create a new exporter
-		IExportType<TT, CT> exportType = exportTypeFactory.createNewExporter(fileOptionsValue);
+		IExportType<TT, CT, ?> exportType = exportTypeFactory.createNewExporter(fileOptionsValue);
 		TT exportContext = exportType.getContext();
 		
 		// invoke the pre-processor if there is one

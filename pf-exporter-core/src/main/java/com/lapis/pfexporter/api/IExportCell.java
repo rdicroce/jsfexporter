@@ -1,10 +1,12 @@
 package com.lapis.pfexporter.api;
 
-public interface ITableCell {
+import java.util.List;
 
+public interface IExportCell {
+
+	List<String> getName();
 	String getValue();
 	int getColumnSpanCount();
 	int getRowSpanCount();
-	FacetType getFacetType();
 	
 }

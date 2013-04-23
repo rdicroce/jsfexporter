@@ -1,14 +1,15 @@
 package com.lapis.pfexporter.xml;
 
 import org.jdom2.Document;
+import org.jdom2.Element;
 
 import com.lapis.pfexporter.api.IExportType;
 import com.lapis.pfexporter.spi.IExportTypeFactory;
 
-public class XMLExportTypeFactory implements IExportTypeFactory<Document, Void> {
+public class XMLExportTypeFactory implements IExportTypeFactory<Document, Void, Element> {
 
 	@Override
-	public IExportType<Document, Void> createNewExporter(Void configOptions) {
+	public IExportType<Document, Void, Element> createNewExporter(Void configOptions) {
 		return new XMLExportType();
 	}
 

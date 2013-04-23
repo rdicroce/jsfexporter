@@ -29,15 +29,15 @@ public class ExportUtil {
 		return builder.toString();
 	}
 	
-	public static String getColumnHeaderText(UIColumn column, FacesContext context) {
-		String headerText = column.getHeaderText();
-		if (headerText == null) {
-			UIComponent header = column.getFacet(FacetType.HEADER.getFacetName());
-			if (header != null) {
-				headerText = ExportUtil.transformComponentsToString(context, header);
+	public static String getColumnFacetText(UIColumn column, FacetType facetType, FacesContext context) {
+		String facetText = facetType == FacetType.HEADER ? column.getHeaderText() : column.getFooterText();
+		if (facetText == null) {
+			UIComponent facet = column.getFacet(facetType.getFacetName());
+			if (facet != null) {
+				facetText = ExportUtil.transformComponentsToString(context, facet);
 			}
 		}
-		return headerText;
+		return facetText;
 	}
 	
 }

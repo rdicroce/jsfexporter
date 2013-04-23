@@ -1,7 +1,11 @@
 package com.lapis.pfexporter.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,14 +16,22 @@ import org.primefaces.component.treetable.TreeTable;
 import org.primefaces.model.TreeNode;
 
 import com.lapis.pfexporter.api.FacetType;
+import com.lapis.pfexporter.api.IExportCell;
 import com.lapis.pfexporter.api.IExportType;
-import com.lapis.pfexporter.api.IHierarchicalExportType;
-import com.lapis.pfexporter.api.ITabularExportType;
 import com.lapis.pfexporter.spi.IExportSource;
 import com.lapis.pfexporter.util.ExportUtil;
 
 public class TreeTableExportSource implements IExportSource<TreeTable, Void> {
 
+	private static final Map<FacetType, List<String>> FACET_NAMES;
+	
+	static {
+		Map<FacetType, List<String>> facetNamesTemp = new HashMap<FacetType, List<String>>();
+		facetNamesTemp.put(FacetType.HEADER, Collections.unmodifiableList(Arrays.asList("header")));
+		facetNamesTemp.put(FacetType.FOOTER, Collections.unmodifiableList(Arrays.asList("footer")));
+		FACET_NAMES = facetNamesTemp;
+	}
+	
 	@Override
 	public Class<TreeTable> getSourceType() {
 		return TreeTable.class;
@@ -31,7 +43,7 @@ public class TreeTableExportSource implements IExportSource<TreeTable, Void> {
 	}
 
 	@Override
-	public void exportData(TreeTable source, Void configOptions, IExportType<?, ?> exporter, FacesContext context) throws Exception {
+	public void exportData(TreeTable source, Void configOptions, IExportType<?, ?, ?> exporter, FacesContext context) throws Exception {
 		List<UIColumn> columns = new ArrayList<UIColumn>();
 		for (UIComponent kid : source.getChildren()) {
 			if (kid instanceof UIColumn && kid.isRendered() && ((UIColumn) kid).isExportable()) {
@@ -39,68 +51,50 @@ public class TreeTableExportSource implements IExportSource<TreeTable, Void> {
 			}
 		}
 		
-		if (exporter instanceof ITabularExportType) {
-			doTabularExport(source, columns, configOptions, (ITabularExportType<?, ?>) exporter, context);
-		} else if (exporter instanceof IHierarchicalExportType) {
-			processNodeForHierarchicalExport(source.getValue(), null, source, columns, (IHierarchicalExportType<?, ?>) exporter, context);
-		} else {
-			throw new IllegalArgumentException(getClass().getSimpleName() + " does not support exporters of type " + exporter.getClass().getName());
-		}
+		List<String> rowName = Arrays.asList(source.getVar());
+		List<List<String>> columnNames = exportFacet(FacetType.HEADER, columns, exporter, context);
+		exportNode(source.getValue(), null, null, source, rowName, columns, columnNames, exporter, context);
+		exportFacet(FacetType.FOOTER, columns, exporter, context);
 	}
 	
-	private void doTabularExport(TreeTable source, List<UIColumn> columns, Void configOptions, ITabularExportType<?, ?> exporter, FacesContext context) {
-		boolean hasHeaders = false;
-		List<String> headers = new ArrayList<String>();
+	private List<List<String>> exportFacet(FacetType facetType, List<UIColumn> columns, IExportType<?, ?, ?> exporter, FacesContext context) {
+		List<List<String>> columnNames = new ArrayList<List<String>>();
+		List<IExportCell> facetCells = new ArrayList<IExportCell>();
+		boolean hasFacet = false;
 		for (UIColumn column : columns) {
-			String headerText = ExportUtil.getColumnHeaderText(column, context);
-			if (headerText != null) {
-				hasHeaders = true;
+			String facetText = ExportUtil.getColumnFacetText(column, facetType, context);
+			if (facetText != null) {
+				hasFacet = true;
 			}
-			headers.add(headerText);
+			columnNames.add(Arrays.asList(facetText));
 		}
-		if (hasHeaders) {
-			for (String headerText : headers) {
-				exporter.exportCell(new TableCellImpl(headerText, 1, 1, FacetType.HEADER));
+		if (hasFacet) {
+			for (List<String> columnName : columnNames) {
+				facetCells.add(new ExportCellImpl(FACET_NAMES.get(facetType), columnName.get(0), 1, 1));
 			}
-			exporter.rowComplete();
+			exporter.exportRow(new ExportRowImpl(FACET_NAMES.get(facetType), null, facetType, facetCells));
 		}
 		
-		processNodeForTabularExport(source.getValue(), null, source, columns, exporter, context);
+		return columnNames;
 	}
 	
-	private void processNodeForTabularExport(TreeNode node, String rowKey, TreeTable source, List<UIColumn> columns, ITabularExportType<?, ?> exporter, FacesContext context) {
+	private void exportNode(TreeNode node, String rowKey, Object parentRowId, TreeTable source, List<String> rowName, List<UIColumn> columns,
+			List<List<String>> columnNames, IExportType<?, ?, ?> exporter, FacesContext context) {
 		if (rowKey != null) {
 			source.setRowKey(rowKey);
-			for (UIColumn column : columns) {
-				exporter.exportCell(new TableCellImpl(ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1, null));
+			
+			List<IExportCell> cells = new ArrayList<IExportCell>();
+			int columnCount = columns.size();
+			for (int i = 0; i < columnCount; i++) {
+				cells.add(new ExportCellImpl(columnNames.get(i), ExportUtil.transformComponentsToString(context, columns.get(i).getChildren()), 1, 1));
 			}
-			exporter.rowComplete();
+			
+			parentRowId = exporter.exportRow(new ExportRowImpl(rowName, parentRowId, null, cells));
 		}
 		
 		for (int i = 0; i < node.getChildCount(); i++) {
 			String childRowKey = rowKey == null ? String.valueOf(i) : rowKey + UITree.SEPARATOR + i;
-			processNodeForTabularExport(node.getChildren().get(i), childRowKey, source, columns, exporter, context);
-		}
-	}
-	
-	private void processNodeForHierarchicalExport(TreeNode node, String rowKey, TreeTable source, List<UIColumn> columns, IHierarchicalExportType<?, ?> exporter, FacesContext context) {
-		if (rowKey != null) {
-			source.setRowKey(rowKey);
-			exporter.enterChild(source.getVar());
-			for (UIColumn column : columns) {
-				exporter.exportValue(ExportUtil.getColumnHeaderText(column, context), ExportUtil.transformComponentsToString(context, column.getChildren()));
-			}
-		}
-		
-		if (!node.isLeaf()) {
-			for (int i = 0; i < node.getChildCount(); i++) {
-				String childRowKey = rowKey == null ? String.valueOf(i) : rowKey + UITree.SEPARATOR + i;
-				processNodeForHierarchicalExport(node.getChildren().get(i), childRowKey, source, columns, exporter, context);
-			}
-		}
-		
-		if (rowKey != null) {
-			exporter.exitChild();
+			exportNode(node.getChildren().get(i), childRowKey, parentRowId, source, rowName, columns, columnNames, exporter, context);
 		}
 	}
 

@@ -1,9 +1,11 @@
 package com.lapis.pfexporter.csv;
 
+import java.util.List;
+
 import com.lapis.pfexporter.api.IExportType;
 import com.lapis.pfexporter.spi.IExportTypeFactory;
 
-public class CSVExportTypeFactory implements IExportTypeFactory<CSVContext, CSVExportOptions> {
+public class CSVExportTypeFactory implements IExportTypeFactory<List<List<String>>, CSVExportOptions, Integer> {
 
 	@Override
 	public String getContentType() {
@@ -21,7 +23,7 @@ public class CSVExportTypeFactory implements IExportTypeFactory<CSVContext, CSVE
 	}
 
 	@Override
-	public IExportType<CSVContext, CSVExportOptions> createNewExporter(CSVExportOptions configOptions) {
+	public IExportType<List<List<String>>, CSVExportOptions, Integer> createNewExporter(CSVExportOptions configOptions) {
 		return new CSVExportType(configOptions);
 	}
 	

@@ -8,6 +8,6 @@ public interface IExportSource<T, C> {
 
 	Class<T> getSourceType();
 	C getDefaultConfigOptions();
-	void exportData(T source, C configOptions, IExportType<?, ?> exporter, FacesContext context) throws Exception;
+	void exportData(T source, C configOptions, IExportType<?, ?, ?> exporter, FacesContext context) throws Exception;
 
 }

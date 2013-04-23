@@ -12,13 +12,13 @@ public class ExportTypeFactoryFactory {
 
 	private static final String KEY = ExportTypeFactoryFactory.class.getName();
 	
-	public static IExportTypeFactory<?, ?> getExportType(FacesContext context, String type) {
-		Map<String, IExportTypeFactory<?, ?>> factories = (Map<String, IExportTypeFactory<?, ?>>) context.getExternalContext().getApplicationMap().get(KEY);
+	public static IExportTypeFactory<?, ?, ?> getExportType(FacesContext context, String type) {
+		Map<String, IExportTypeFactory<?, ?, ?>> factories = (Map<String, IExportTypeFactory<?, ?, ?>>) context.getExternalContext().getApplicationMap().get(KEY);
 		if (factories == null) {
-			factories = new HashMap<String, IExportTypeFactory<?,?>>();
+			factories = new HashMap<String, IExportTypeFactory<?, ?, ?>>();
 			
 			ServiceLoader<IExportTypeFactory> loader = ServiceLoader.load(IExportTypeFactory.class);
-			for (IExportTypeFactory<?, ?> availableFactory : loader) {
+			for (IExportTypeFactory<?, ?, ?> availableFactory : loader) {
 				factories.put(availableFactory.getFileExtension(), availableFactory);
 			}
 			

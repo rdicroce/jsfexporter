@@ -1,20 +1,25 @@
 package com.lapis.pfexporter.impl;
 
-import com.lapis.pfexporter.api.FacetType;
-import com.lapis.pfexporter.api.ITableCell;
+import java.util.List;
 
-public class TableCellImpl implements ITableCell {
+import com.lapis.pfexporter.api.IExportCell;
 
+public class ExportCellImpl implements IExportCell {
+
+	private List<String> name;
 	private String value;
 	private int columnSpanCount;
 	private int rowSpanCount;
-	private FacetType facetType;
 	
-	public TableCellImpl(String value, int columnSpanCount, int rowSpanCount, FacetType facetType) {
+	public ExportCellImpl(List<String> name, String value, int columnSpanCount, int rowSpanCount) {
+		this.name = name;
 		this.value = value;
 		this.columnSpanCount = columnSpanCount;
 		this.rowSpanCount = rowSpanCount;
-		this.facetType = facetType;
+	}
+
+	public List<String> getName() {
+		return name;
 	}
 
 	public String getValue() {
@@ -27,10 +32,6 @@ public class TableCellImpl implements ITableCell {
 
 	public int getRowSpanCount() {
 		return rowSpanCount;
-	}
-
-	public FacetType getFacetType() {
-		return facetType;
 	}
 	
 }
