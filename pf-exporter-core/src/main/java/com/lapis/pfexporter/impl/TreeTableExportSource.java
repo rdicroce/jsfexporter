@@ -41,6 +41,17 @@ public class TreeTableExportSource implements IExportSource<TreeTable, Void> {
 	public Void getDefaultConfigOptions() {
 		return null;
 	}
+	
+	@Override
+	public int getColumnCount(TreeTable source, Void configOptions) {
+		int columnCount = 0;
+		for (UIComponent kid : source.getChildren()) {
+			if (kid instanceof UIColumn && kid.isRendered() && ((UIColumn) kid).isExportable()) {
+				columnCount++;
+			}
+		}
+		return columnCount;
+	}
 
 	@Override
 	public void exportData(TreeTable source, Void configOptions, IExportType<?, ?, ?> exporter, FacesContext context) throws Exception {

@@ -13,6 +13,9 @@
 			<p:commandButton value="Export XML" ajax="false">
 				<l:dataExporter source="table" fileType="xml" fileName="cars"/>
 			</p:commandButton>
+			<p:commandButton value="Export PDF" ajax="false">
+				<l:dataExporter source="table" fileType="pdf" fileName="cars"/>
+			</p:commandButton>
 		
 			<p:dataTable id="table" var="sale" value="#{dataTableGroupingBean.sales}">
 				<p:columnGroup type="header">

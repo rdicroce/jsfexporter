@@ -13,6 +13,9 @@
 			<p:commandButton value="Export XML" ajax="false">
 				<l:dataExporter source="table" fileType="xml" fileName="cars" sourceOptions="#{nonLazyTableBean.DTPageOnly}"/>
 			</p:commandButton>
+			<p:commandButton value="Export PDF" ajax="false">
+				<l:dataExporter source="table" fileType="pdf" fileName="cars" sourceOptions="#{nonLazyTableBean.DTPageOnly}"/>
+			</p:commandButton>
 		
 			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}" rows="5" paginator="true">
 				<p:column>

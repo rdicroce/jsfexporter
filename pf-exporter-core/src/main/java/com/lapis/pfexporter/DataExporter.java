@@ -127,7 +127,9 @@ public class DataExporter implements ActionListener, StateHolder {
 		}
 		
 		// generate the export
+		exportType.beginExport(exportSource.getColumnCount(sourceComponent, sourceOptionsValue));
 		exportSource.exportData(sourceComponent, sourceOptionsValue, exportType, facesContext);
+		exportType.endExport();
 		
 		// invoke the post-processor if there is one
 		if (postProcessor != null) {

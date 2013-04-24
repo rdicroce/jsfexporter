@@ -8,11 +8,11 @@ import javax.faces.context.ExternalContext;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
+import com.lapis.pfexporter.api.AbstractExportType;
 import com.lapis.pfexporter.api.IExportCell;
 import com.lapis.pfexporter.api.IExportRow;
-import com.lapis.pfexporter.api.IExportType;
 
-public class CSVExportType implements IExportType<List<List<String>>, CSVExportOptions, Integer> {
+public class CSVExportType extends AbstractExportType<List<List<String>>, CSVExportOptions, Integer> {
 
 	private static final String[] EMPTY_STRING_ARRAY = new String[0];
 	
@@ -24,8 +24,6 @@ public class CSVExportType implements IExportType<List<List<String>>, CSVExportO
 	
 	public CSVExportType(CSVExportOptions configOptions) {
 		this.configOptions = configOptions;
-		
-		columnCount = -1;
 		rows = new ArrayList<List<String>>();
 	}
 
@@ -58,14 +56,12 @@ public class CSVExportType implements IExportType<List<List<String>>, CSVExportO
 	}
 
 	@Override
+	public void beginExport(int columnCount) {
+		this.columnCount = columnCount;
+	}
+
+	@Override
 	public Integer exportRow(IExportRow row) {
-		if (columnCount == -1) {
-			columnCount = 0;
-			for (IExportCell cell : row.getCells()) {
-				columnCount += cell.getColumnSpanCount();
-			}
-		}
-		
 		List<String> outputRow;
 		if (rowsIndex < rows.size()) {
 			outputRow = rows.get(rowsIndex);

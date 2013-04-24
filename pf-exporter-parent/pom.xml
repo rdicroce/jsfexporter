@@ -14,6 +14,7 @@
 		<module>../pf-exporter-core</module>
 		<module>../csv-exporter</module>
 		<module>../xml-exporter</module>
+		<module>../pdf-exporter</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -31,6 +32,11 @@
 			<dependency>
 				<groupId>com.lapis.pfexporter</groupId>
 				<artifactId>xml-exporter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lapis.pfexporter</groupId>
+				<artifactId>pdf-exporter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -54,6 +60,29 @@
 				<scope>provided</scope>
 			</dependency>
 			
+			<dependency>
+				<groupId>com.lowagie</groupId>
+				<artifactId>itext</artifactId>
+				<version>4.2.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.bouncycastle</groupId>
+						<artifactId>bctsp-jdk14</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>jfree</groupId>
+						<artifactId>jfreechart</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.swinglabs</groupId>
+						<artifactId>pdf-renderer</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 			<dependency>
 				<groupId>net.sf.opencsv</groupId>
 				<artifactId>opencsv</artifactId>

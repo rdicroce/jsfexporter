@@ -45,6 +45,17 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 	public DataTableExportOptions getDefaultConfigOptions() {
 		return new DataTableExportOptions();
 	}
+	
+	@Override
+	public int getColumnCount(DataTable source, DataTableExportOptions configOptions) {
+		int columnCount = 0;
+		for (UIComponent kid : source.getChildren()) {
+			if (kid instanceof UIColumn && kid.isRendered() && ((UIColumn) kid).isExportable()) {
+				columnCount++;
+			}
+		}
+		return columnCount;
+	}
 
 	@Override
 	public void exportData(DataTable source, DataTableExportOptions configOptions, IExportType<?, ?, ?> exporter, FacesContext context) throws Exception {

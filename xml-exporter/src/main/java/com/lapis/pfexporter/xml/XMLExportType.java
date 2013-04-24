@@ -7,11 +7,11 @@ import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import com.lapis.pfexporter.api.AbstractExportType;
 import com.lapis.pfexporter.api.IExportCell;
 import com.lapis.pfexporter.api.IExportRow;
-import com.lapis.pfexporter.api.IExportType;
 
-public class XMLExportType implements IExportType<Document, Void, Element> {
+public class XMLExportType extends AbstractExportType<Document, Void, Element> {
 
 	// !|"|#|\$|%|&|'|\(|\)|\*|\+|,|/|;|<|=|>|\?|@|\[|\\|\]|\^|`|\{|\||\}|~|\s
 	private static final String ILLEGAL_CHARACTER_REGEX = "!|\"|#|\\$|%|&|'|\\(|\\)|\\*|\\+|,|/|;|<|=|>|\\?|@|\\[|\\\\|\\]|\\^|`|\\{|\\||\\}|~|\\s";
