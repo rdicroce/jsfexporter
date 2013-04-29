@@ -17,12 +17,7 @@ public class PDFExportTypeFactory implements IExportTypeFactory<Document, Void, 
 	}
 
 	@Override
-	public String getContentType() {
-		return "application/pdf";
-	}
-
-	@Override
-	public String getFileExtension() {
+	public String getExportTypeId() {
 		return "pdf";
 	}
 

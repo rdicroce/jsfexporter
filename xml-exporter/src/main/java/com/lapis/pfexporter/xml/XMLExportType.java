@@ -27,6 +27,16 @@ public class XMLExportType extends AbstractExportType<Document, Void, Element> {
 	}
 	
 	@Override
+	public String getContentType() {
+		return "application/xml";
+	}
+
+	@Override
+	public String getFileExtension() {
+		return "xml";
+	}
+	
+	@Override
 	public Document getContext() {
 		return document;
 	}

@@ -138,7 +138,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		
 		// configure response meta-data
 		externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
-		externalContext.setResponseContentType(exportTypeFactory.getContentType());
+		externalContext.setResponseContentType(exportType.getContentType());
 		externalContext.setResponseHeader("Expires", "0");
 		externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
 		externalContext.setResponseHeader("Pragma", "public");
@@ -147,7 +147,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		 * So we also supply a normal filename encoded the same way, since that works on most browsers (but not Firefox).
 		 * See RFC 6266 and http://greenbytes.de/tech/tc2231/
 		 */
-		String encodedFileName = URLEncoder.encode(fileName.getValue(elContext) + "." + fileTypeValue, "UTF-8");
+		String encodedFileName = URLEncoder.encode(fileName.getValue(elContext) + "." + exportType.getFileExtension(), "UTF-8");
 		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"; filename*=UTF8''" + encodedFileName);
 		
 		// write the response and signal JSF that we're done

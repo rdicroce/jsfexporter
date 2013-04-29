@@ -2,7 +2,6 @@ package com.lapis.pfexporter.xls;
 
 import javax.faces.context.ExternalContext;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,14 +12,16 @@ import com.lapis.pfexporter.api.AbstractExportType;
 import com.lapis.pfexporter.api.IExportCell;
 import com.lapis.pfexporter.api.IExportRow;
 
-public class XLSExportType extends AbstractExportType<Workbook, Void, Row> {
+public class XLSExportType extends AbstractExportType<Workbook, ExcelExportOptions, Row> {
 
+	private ExcelExportOptions configOptions;
 	private Workbook workbook;
 	private Sheet sheet;
 	private int rowCount;
 	
-	public XLSExportType() {
-		workbook = new HSSFWorkbook();
+	public XLSExportType(ExcelExportOptions configOptions) {
+		this.configOptions = configOptions;
+		workbook = configOptions.getFormat().createNewWorkbook();
 		sheet = workbook.createSheet();
 	}
 	
@@ -64,6 +65,16 @@ public class XLSExportType extends AbstractExportType<Workbook, Void, Row> {
 	@Override
 	public void writeExport(ExternalContext externalContext) throws Exception {
 		workbook.write(externalContext.getResponseOutputStream());
+	}
+
+	@Override
+	public String getContentType() {
+		return configOptions.getFormat().getMimeType();
+	}
+
+	@Override
+	public String getFileExtension() {
+		return configOptions.getFormat().getFileExtension();
 	}
 
 }

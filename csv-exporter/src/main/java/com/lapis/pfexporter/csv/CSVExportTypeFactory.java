@@ -8,16 +8,6 @@ import com.lapis.pfexporter.spi.IExportTypeFactory;
 public class CSVExportTypeFactory implements IExportTypeFactory<List<List<String>>, CSVExportOptions, Integer> {
 
 	@Override
-	public String getContentType() {
-		return "text/csv";
-	}
-
-	@Override
-	public String getFileExtension() {
-		return "csv";
-	}
-
-	@Override
 	public CSVExportOptions getDefaultConfigOptions() {
 		return new CSVExportOptions();
 	}
@@ -25,6 +15,11 @@ public class CSVExportTypeFactory implements IExportTypeFactory<List<List<String
 	@Override
 	public IExportType<List<List<String>>, CSVExportOptions, Integer> createNewExporter(CSVExportOptions configOptions) {
 		return new CSVExportType(configOptions);
+	}
+
+	@Override
+	public String getExportTypeId() {
+		return "csv";
 	}
 	
 }

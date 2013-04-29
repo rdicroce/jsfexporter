@@ -16,8 +16,8 @@
 			<p:commandButton value="Export PDF" ajax="false">
 				<l:dataExporter source="treeTable" fileType="pdf" fileName="documents"/>
 			</p:commandButton>
-			<p:commandButton value="Export XLS" ajax="false">
-				<l:dataExporter source="treeTable" fileType="xls" fileName="document"/>
+			<p:commandButton value="Export XLSX" ajax="false">
+				<l:dataExporter source="treeTable" fileType="excel" fileName="document"/>
 			</p:commandButton>
 			
 			<p:treeTable id="treeTable" value="#{treeTableBean.root}" var="document">

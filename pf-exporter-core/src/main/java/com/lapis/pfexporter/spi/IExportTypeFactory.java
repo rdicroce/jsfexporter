@@ -6,7 +6,6 @@ public interface IExportTypeFactory<T, C, R> {
 
 	IExportType<T, C, R> createNewExporter(C configOptions);
 	C getDefaultConfigOptions();
-	String getContentType();
-	String getFileExtension();
+	String getExportTypeId();
 	
 }

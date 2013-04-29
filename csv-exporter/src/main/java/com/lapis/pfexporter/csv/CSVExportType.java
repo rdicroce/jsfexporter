@@ -108,4 +108,14 @@ public class CSVExportType extends AbstractExportType<List<List<String>>, CSVExp
 		return newRow;
 	}
 
+	@Override
+	public String getContentType() {
+		return "text/csv";
+	}
+
+	@Override
+	public String getFileExtension() {
+		return "csv";
+	}
+
 }

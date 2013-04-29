@@ -19,7 +19,7 @@ public class ExportTypeFactoryFactory {
 			
 			ServiceLoader<IExportTypeFactory> loader = ServiceLoader.load(IExportTypeFactory.class);
 			for (IExportTypeFactory<?, ?, ?> availableFactory : loader) {
-				factories.put(availableFactory.getFileExtension(), availableFactory);
+				factories.put(availableFactory.getExportTypeId(), availableFactory);
 			}
 			
 			context.getExternalContext().getApplicationMap().put(KEY, factories);

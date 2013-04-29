@@ -71,5 +71,15 @@ public class PDFExportType implements IExportType<Document, Void, Integer> {
 		document.close();
 		buffer.writeTo(externalContext.getResponseOutputStream());
 	}
+	
+	@Override
+	public String getContentType() {
+		return "application/pdf";
+	}
+
+	@Override
+	public String getFileExtension() {
+		return "pdf";
+	}
 
 }

@@ -19,12 +19,7 @@ public class XMLExportTypeFactory implements IExportTypeFactory<Document, Void, 
 	}
 
 	@Override
-	public String getContentType() {
-		return "application/xml";
-	}
-
-	@Override
-	public String getFileExtension() {
+	public String getExportTypeId() {
 		return "xml";
 	}
 
