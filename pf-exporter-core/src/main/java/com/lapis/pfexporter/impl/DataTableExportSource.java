@@ -69,12 +69,26 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		List<List<String>> columnNames = exportFacet(FacetType.HEADER, source, columns, exporter, context);
 		
 		if (configOptions.getRange() == ExportRange.ALL) {
-			int first = source.getFirst();
 			if (source.isLazy()) {
-				// TODO implement
+				int first = source.getFirst();
+				int rowCount = source.getRowCount();
+				int rowsPerPage = source.getRows();
+				
+				int passes = rowCount / rowsPerPage; // integer division rounds towards zero
+				int finalPass = rowCount % rowsPerPage;
+				for (int i = 0; i < passes; i++) {
+					source.setFirst(i * rowsPerPage);
+					source.loadLazyData();
+					exportRowCells(source, columns, columnNames, i * rowsPerPage, (i + 1) * rowsPerPage, exporter, context);
+				}
+				if (finalPass > 0) {
+					exportRowCells(source, columns, columnNames, passes * rowsPerPage, (passes * rowsPerPage) + finalPass, exporter, context);
+				}
+				
+				source.setFirst(first);
+				source.loadLazyData();
 			} else {
 				exportRowCells(source, columns, columnNames, 0, source.getRowCount(), exporter, context);
-				source.setFirst(first);
 			}
 		} else { // PAGE_ONLY
 			exportRowCells(source, columns, columnNames, source.getFirst(), source.getFirst() + source.getRows(), exporter, context);
