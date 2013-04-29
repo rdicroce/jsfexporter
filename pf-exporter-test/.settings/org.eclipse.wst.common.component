@@ -16,6 +16,9 @@
         <dependent-module archiveName="pdf-exporter-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pdf-exporter/pdf-exporter">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="xls-exporter-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/xls-exporter/xls-exporter">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="pf-exporter-test"/>
         <property name="java-output-path" value="/pf-exporter-test/target/classes"/>
     </wb-module>

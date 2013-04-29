@@ -35,6 +35,10 @@
 			<artifactId>pdf-exporter</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.lapis.pfexporter</groupId>
+			<artifactId>xls-exporter</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 		</dependency>

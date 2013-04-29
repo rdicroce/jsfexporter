@@ -8,6 +8,8 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<version.org.apache.poi>3.9</version.org.apache.poi>
 	</properties>
 	
 	<modules>
@@ -15,6 +17,7 @@
 		<module>../csv-exporter</module>
 		<module>../xml-exporter</module>
 		<module>../pdf-exporter</module>
+		<module>../xls-exporter</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -37,6 +40,11 @@
 			<dependency>
 				<groupId>com.lapis.pfexporter</groupId>
 				<artifactId>pdf-exporter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lapis.pfexporter</groupId>
+				<artifactId>xls-exporter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -87,6 +95,16 @@
 				<groupId>net.sf.opencsv</groupId>
 				<artifactId>opencsv</artifactId>
 				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${version.org.apache.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${version.org.apache.poi}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jdom</groupId>
