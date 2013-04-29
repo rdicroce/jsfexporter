@@ -36,7 +36,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.lapis.pfexporter</groupId>
-			<artifactId>xls-exporter</artifactId>
+			<artifactId>excel-exporter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>

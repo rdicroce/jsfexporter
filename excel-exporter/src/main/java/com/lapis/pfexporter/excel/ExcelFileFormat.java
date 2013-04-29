@@ -1,4 +1,4 @@
-package com.lapis.pfexporter.xls;
+package com.lapis.pfexporter.excel;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;

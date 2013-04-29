@@ -1,4 +1,4 @@
-package com.lapis.pfexporter.xls;
+package com.lapis.pfexporter.excel;
 
 public class ExcelExportOptions {
 

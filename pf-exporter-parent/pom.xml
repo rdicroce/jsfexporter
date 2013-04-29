@@ -17,7 +17,7 @@
 		<module>../csv-exporter</module>
 		<module>../xml-exporter</module>
 		<module>../pdf-exporter</module>
-		<module>../xls-exporter</module>
+		<module>../excel-exporter</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -44,7 +44,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.lapis.pfexporter</groupId>
-				<artifactId>xls-exporter</artifactId>
+				<artifactId>excel-exporter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			

@@ -1,4 +1,4 @@
-package com.lapis.pfexporter.xls;
+package com.lapis.pfexporter.excel;
 
 import javax.faces.context.ExternalContext;
 
@@ -12,14 +12,14 @@ import com.lapis.pfexporter.api.AbstractExportType;
 import com.lapis.pfexporter.api.IExportCell;
 import com.lapis.pfexporter.api.IExportRow;
 
-public class XLSExportType extends AbstractExportType<Workbook, ExcelExportOptions, Row> {
+public class ExcelExportType extends AbstractExportType<Workbook, ExcelExportOptions, Row> {
 
 	private ExcelExportOptions configOptions;
 	private Workbook workbook;
 	private Sheet sheet;
 	private int rowCount;
 	
-	public XLSExportType(ExcelExportOptions configOptions) {
+	public ExcelExportType(ExcelExportOptions configOptions) {
 		this.configOptions = configOptions;
 		workbook = configOptions.getFormat().createNewWorkbook();
 		sheet = workbook.createSheet();

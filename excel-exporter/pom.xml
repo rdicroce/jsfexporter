@@ -6,7 +6,7 @@
 		<artifactId>pf-exporter-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>xls-exporter</artifactId>
+	<artifactId>excel-exporter</artifactId>
 	
 	<dependencies>
 		<dependency>
