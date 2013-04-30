@@ -8,16 +8,16 @@
 	<ui:define name="content">
 		<h:form>
 			<p:commandButton value="Export CSV" ajax="false">
-				<l:dataExporter source="table" fileType="csv" fileName="cars" fileOptions="#{nonLazyTableBean.CSVWithUTF8BOM}"/>
+				<l:dataExporter source="table" fileType="csv" fileName="列表" fileOptions="#{nonLazyTableBean.CSVWithUTF8BOM}"/>
 			</p:commandButton>
 			<p:commandButton value="Export XML" ajax="false">
-				<l:dataExporter source="table" fileType="xml" fileName="cars"/>
+				<l:dataExporter source="table" fileType="xml" fileName="列表"/>
 			</p:commandButton>
 			<p:commandButton value="Export PDF" ajax="false">
-				<l:dataExporter source="table" fileType="pdf" fileName="cars"/>
+				<l:dataExporter source="table" fileType="pdf" fileName="列表"/>
 			</p:commandButton>
 			<p:commandButton value="Export XLSX" ajax="false">
-				<l:dataExporter source="table" fileType="excel" fileName="cars"/>
+				<l:dataExporter source="table" fileType="excel" fileName="列表"/>
 			</p:commandButton>
 		
 			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}">
