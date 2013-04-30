@@ -29,6 +29,15 @@ public class CSVExportType extends AbstractExportType<List<List<String>>, CSVExp
 
 	@Override
 	public void writeExport(ExternalContext externalContext) throws Exception {
+		String encoding = configOptions.getCharacterEncoding();
+		boolean writeBOM = false;
+		if ("UTF-8-with-bom".equalsIgnoreCase(encoding)) {
+			externalContext.setResponseCharacterEncoding("UTF-8");
+			writeBOM = true;
+		} else {
+			externalContext.setResponseCharacterEncoding(encoding);
+		}
+		
 		Writer outputWriter = externalContext.getResponseOutputWriter();
 		CSVWriter csvWriter = new CSVWriter(
 				outputWriter,
@@ -37,12 +46,8 @@ public class CSVExportType extends AbstractExportType<List<List<String>>, CSVExp
 				configOptions.getEscapeCharacter(),
 				configOptions.getLineTerminator());
 		
-		String encoding = configOptions.getCharacterEncoding();
-		if ("UTF-8-with-bom".equalsIgnoreCase(encoding)) {
-			externalContext.setResponseCharacterEncoding("UTF-8");
+		if (writeBOM) {
 			outputWriter.write('\ufeff');
-		} else {
-			externalContext.setResponseCharacterEncoding(encoding);
 		}
 		
 		for (List<String> row : rows) {

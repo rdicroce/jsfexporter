@@ -9,7 +9,10 @@ import com.lapis.pfexporter.api.IExportRow;
 import com.lapis.pfexporter.api.IExportType;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -18,11 +21,13 @@ public class PDFExportType implements IExportType<Document, Void, Integer> {
 
 	private Document document;
 	private PdfPTable table;
+	private Font font;
 	private int rowCount;
 	private ByteArrayOutputStream buffer;
 	
 	public PDFExportType() {
 		document = new Document();
+		font = FontFactory.getFont("fonts/DroidSansFallbackFull.ttf", BaseFont.IDENTITY_H, true);
 		buffer = new ByteArrayOutputStream();
 		try {
 			PdfWriter.getInstance(document, buffer);
@@ -50,7 +55,7 @@ public class PDFExportType implements IExportType<Document, Void, Integer> {
 			PdfPCell pdfCell = new PdfPCell();
 			pdfCell.setColspan(cell.getColumnSpanCount());
 			pdfCell.setRowspan(cell.getRowSpanCount());
-			pdfCell.setPhrase(new Phrase(cell.getValue()));
+			pdfCell.setPhrase(new Phrase(cell.getValue(), font));
 			table.addCell(pdfCell);
 		}
 		

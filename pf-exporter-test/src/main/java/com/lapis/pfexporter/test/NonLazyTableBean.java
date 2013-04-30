@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions;
 import com.lapis.pfexporter.api.datatable.DataTableExportOptions.ExportRange;
+import com.lapis.pfexporter.csv.CSVExportOptions;
 
 @ManagedBean
 @ViewScoped
@@ -35,6 +36,12 @@ public class NonLazyTableBean {
 	
 	public DataTableExportOptions getDTPageOnly() {
 		return new DataTableExportOptions(ExportRange.PAGE_ONLY);
+	}
+	
+	public CSVExportOptions getCSVWithUTF8BOM() {
+		CSVExportOptions options = new CSVExportOptions();
+		options.setCharacterEncoding("UTF-8-with-bom");
+		return options;
 	}
 
 	public List<Car> getCars() {
