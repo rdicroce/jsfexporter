@@ -1,4 +1,4 @@
-package com.lapis.jsfexporter.api.datatable;
+package com.lapis.jsfexporter.primefaces.datatable;
 
 import java.io.Serializable;
 

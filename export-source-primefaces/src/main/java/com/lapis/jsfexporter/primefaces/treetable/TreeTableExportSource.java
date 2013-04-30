@@ -1,4 +1,4 @@
-package com.lapis.jsfexporter.impl;
+package com.lapis.jsfexporter.primefaces.treetable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,9 @@ import org.primefaces.model.TreeNode;
 import com.lapis.jsfexporter.api.FacetType;
 import com.lapis.jsfexporter.api.IExportCell;
 import com.lapis.jsfexporter.api.IExportType;
+import com.lapis.jsfexporter.impl.ExportCellImpl;
+import com.lapis.jsfexporter.impl.ExportRowImpl;
+import com.lapis.jsfexporter.primefaces.util.PrimeFacesUtil;
 import com.lapis.jsfexporter.spi.IExportSource;
 import com.lapis.jsfexporter.util.ExportUtil;
 
@@ -73,7 +76,7 @@ public class TreeTableExportSource implements IExportSource<TreeTable, Void> {
 		List<IExportCell> facetCells = new ArrayList<IExportCell>();
 		boolean hasFacet = false;
 		for (UIColumn column : columns) {
-			String facetText = ExportUtil.getColumnFacetText(column, facetType, context);
+			String facetText = PrimeFacesUtil.getColumnFacetText(column, facetType, context);
 			if (facetText != null) {
 				hasFacet = true;
 			}

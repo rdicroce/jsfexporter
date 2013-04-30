@@ -24,6 +24,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.lapis.jsfexporter</groupId>
+			<artifactId>export-source-primefaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lapis.jsfexporter</groupId>
 			<artifactId>export-type-csv</artifactId>
 		</dependency>
 		<dependency>

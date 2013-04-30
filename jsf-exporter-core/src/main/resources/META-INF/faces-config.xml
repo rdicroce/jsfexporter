@@ -6,12 +6,6 @@
 
 	<name>lapisJSFexporter</name>
 
-	<ordering>
-		<after>
-			<name>primefaces</name>
-		</after>
-	</ordering>
-
 	<component>
 		<component-type>com.lapis.jsfexporter.DataExporter</component-type>
 		<component-class>com.lapis.jsfexporter.DataExporter</component-class>

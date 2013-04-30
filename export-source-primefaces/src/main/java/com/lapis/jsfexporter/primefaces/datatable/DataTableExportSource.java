@@ -1,4 +1,4 @@
-package com.lapis.jsfexporter.impl;
+package com.lapis.jsfexporter.primefaces.datatable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +20,10 @@ import org.primefaces.component.row.Row;
 import com.lapis.jsfexporter.api.FacetType;
 import com.lapis.jsfexporter.api.IExportCell;
 import com.lapis.jsfexporter.api.IExportType;
-import com.lapis.jsfexporter.api.datatable.DataTableExportOptions;
-import com.lapis.jsfexporter.api.datatable.DataTableExportOptions.ExportRange;
+import com.lapis.jsfexporter.impl.ExportCellImpl;
+import com.lapis.jsfexporter.impl.ExportRowImpl;
+import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions.ExportRange;
+import com.lapis.jsfexporter.primefaces.util.PrimeFacesUtil;
 import com.lapis.jsfexporter.spi.IExportSource;
 import com.lapis.jsfexporter.util.ExportUtil;
 
@@ -105,7 +107,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		if (columnGroup == null) {
 			boolean hasFacet = false;
 			for (UIColumn column : columns) {
-				String facetText = ExportUtil.getColumnFacetText(column, facetType, context);
+				String facetText = PrimeFacesUtil.getColumnFacetText(column, facetType, context);
 				if (facetText != null) {
 					hasFacet = true;
 				}
@@ -138,7 +140,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 				
 				for (UIComponent rowChild : row.getChildren()) {
 					UIColumn rowColumn = (UIColumn) rowChild;
-					String facetText = ExportUtil.getColumnFacetText(rowColumn, facetType, context);
+					String facetText = PrimeFacesUtil.getColumnFacetText(rowColumn, facetType, context);
 					
 					while (columnNames.get(columnIndex).get(rowIndex) != null) {
 						columnIndex++;

@@ -1,7 +1,6 @@
 package com.lapis.jsfexporter;
 
 import java.net.URLEncoder;
-import java.util.HashMap;
 
 import javax.el.ELContext;
 import javax.el.MethodExpression;
@@ -14,8 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
-
-import org.primefaces.util.Constants;
 
 import com.lapis.jsfexporter.api.IExportType;
 import com.lapis.jsfexporter.spi.IExportSource;
@@ -137,7 +134,6 @@ public class DataExporter implements ActionListener, StateHolder {
 		}
 		
 		// configure response meta-data
-		externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
 		externalContext.setResponseContentType(exportType.getContentType());
 		externalContext.setResponseHeader("Expires", "0");
 		externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");

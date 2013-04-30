@@ -7,6 +7,9 @@
         <dependent-module archiveName="jsf-exporter-core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jsf-exporter-core/jsf-exporter-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="export-source-primefaces-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-primefaces/export-source-primefaces">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="export-type-csv-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-csv/export-type-csv">
             <dependency-type>uses</dependency-type>
         </dependent-module>

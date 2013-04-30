@@ -9,9 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.lapis.jsfexporter.api.datatable.DataTableExportOptions;
-import com.lapis.jsfexporter.api.datatable.DataTableExportOptions.ExportRange;
 import com.lapis.jsfexporter.csv.CSVExportOptions;
+import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions;
+import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions.ExportRange;
 
 @ManagedBean
 @ViewScoped
