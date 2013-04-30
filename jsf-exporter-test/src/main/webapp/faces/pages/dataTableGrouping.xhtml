@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:l="http://www.lapis.com/jsf/exporter"
+	template="../template.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<p:commandButton value="Export CSV" ajax="false">
+				<l:dataExporter source="table" fileType="csv" fileName="cars"/>
+			</p:commandButton>
+			<p:commandButton value="Export XML" ajax="false">
+				<l:dataExporter source="table" fileType="xml" fileName="cars"/>
+			</p:commandButton>
+			<p:commandButton value="Export PDF" ajax="false">
+				<l:dataExporter source="table" fileType="pdf" fileName="cars"/>
+			</p:commandButton>
+			<p:commandButton value="Export XLSX" ajax="false">
+				<l:dataExporter source="table" fileType="excel" fileName="cars"/>
+			</p:commandButton>
+		
+			<p:dataTable id="table" var="sale" value="#{dataTableGroupingBean.sales}">
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column rowspan="3" headerText="Make"/>
+						<p:column colspan="4" headerText="Sales"/>
+					</p:row>
+					
+					<p:row>
+						<p:column colspan="2" headerText="Profit"/>
+						<p:column colspan="2" headerText="Count"/>
+					</p:row>
+					
+					<p:row>
+						<p:column headerText="Last Year"/>
+						<p:column headerText="This Year"/>
+						<p:column headerText="Last Year"/>
+						<p:column headerText="This Year"/>
+					</p:row>
+				</p:columnGroup>
+			
+				<p:column>
+					<h:outputText value="#{sale.make}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{sale.lastYearProfit}">
+						<f:convertNumber type="percent" maxFractionDigits="2"/>
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<h:outputText value="#{sale.thisYearProfit}">
+						<f:convertNumber type="percent" maxFractionDigits="2"/>
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<h:outputText value="#{sale.lastYearCount}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{sale.thisYearCount}" />
+				</p:column>
+				
+				<p:columnGroup type="footer">
+					<p:row>
+						<p:column colspan="3" footerText="Total"/>
+						<p:column footerText="#{dataTableGroupingBean.lastYearCountTotal}"/>
+						<p:column footerText="#{dataTableGroupingBean.thisYearCountTotal}"/>
+					</p:row>
+				</p:columnGroup>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
