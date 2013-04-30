@@ -6,6 +6,13 @@
 
 	<name>lapisJSFexporter</name>
 
+	<application>
+		<system-event-listener>
+			<system-event-listener-class>com.lapis.jsfexporter.PostConstructApplicationEventListener</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+		</system-event-listener>
+	</application>
+
 	<component>
 		<component-type>com.lapis.jsfexporter.DataExporter</component-type>
 		<component-class>com.lapis.jsfexporter.DataExporter</component-class>
