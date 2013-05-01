@@ -6,6 +6,7 @@
 		<groupId>com.lapis.jsfexporter</groupId>
 		<artifactId>jsf-exporter-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jsf-exporter-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>export-type-csv</artifactId>
 	<packaging>jar</packaging>
