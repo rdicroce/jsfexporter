@@ -30,7 +30,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.lapis.jsfexporter.csv.CSVExportOptions;
 import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions;
-import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions.ExportRange;
+import com.lapis.jsfexporter.primefaces.datatable.DataTableExportRange;
 
 @ManagedBean
 @ViewScoped
@@ -54,7 +54,7 @@ public class NonLazyTableBean {
 	}
 	
 	public DataTableExportOptions getDTPageOnly() {
-		return new DataTableExportOptions(ExportRange.PAGE_ONLY);
+		return new DataTableExportOptions(DataTableExportRange.PAGE_ONLY);
 	}
 	
 	public CSVExportOptions getCSVWithUTF8BOM() {

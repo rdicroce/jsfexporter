@@ -21,26 +21,35 @@ package com.lapis.jsfexporter.primefaces.datatable;
 
 import java.io.Serializable;
 
+/**
+ * Configuration options for p:dataTable export source.
+ * @author Richard
+ *
+ */
 public class DataTableExportOptions implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public enum ExportRange {ALL, PAGE_ONLY}
+	private DataTableExportRange range;
 
-	private ExportRange range;
-
+	/**
+	 * Constructor for default options:
+	 * <ul>
+	 * <li>Range: ALL</li>
+	 * </ul>
+	 */
 	public DataTableExportOptions() {
-		this.range = ExportRange.ALL;
+		this.range = DataTableExportRange.ALL;
 	}
 	
-	public DataTableExportOptions(ExportRange range) {
+	public DataTableExportOptions(DataTableExportRange range) {
 		this.range = range;
 	}
 
-	public ExportRange getRange() {
+	public DataTableExportRange getRange() {
 		return range;
 	}
 
-	public void setRange(ExportRange range) {
+	public void setRange(DataTableExportRange range) {
 		this.range = range;
 	}
 

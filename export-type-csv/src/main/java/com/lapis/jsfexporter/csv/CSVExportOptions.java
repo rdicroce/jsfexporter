@@ -21,6 +21,16 @@ package com.lapis.jsfexporter.csv;
 
 import java.io.Serializable;
 
+/**
+ * Configuration options for CSV export type. Most options are self-explanatory.
+ * <p>
+ * The one exception is character encoding. This may be the name of any character
+ * encoding supported by the JVM, or "UTF-8-with-bom", which is equivalent to
+ * the UTF-8 encoding except it prepends the UTF-8 byte-order mark to the CSV file.
+ * This is useful if you want a CSV with non-ASCII characters to open properly in Excel.
+ * @author Richard
+ *
+ */
 public class CSVExportOptions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -30,6 +40,16 @@ public class CSVExportOptions implements Serializable {
 	private String lineTerminator;
 	private String characterEncoding;
 	
+	/**
+	 * Constructor for default options:
+	 * <ul>
+	 * <li>Separator: ,</li>
+	 * <li>Quote: "</li>
+	 * <li>Escape: "</li>
+	 * <li>Line terminator: \n</li>
+	 * <li>Character encoding: UTF-8</li>
+	 * </ul>
+	 */
 	public CSVExportOptions() {
 		this.separatorCharacter = ',';
 		this.quoteCharacter = '"';

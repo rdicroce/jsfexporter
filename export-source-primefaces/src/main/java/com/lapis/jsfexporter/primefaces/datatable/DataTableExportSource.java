@@ -41,7 +41,6 @@ import com.lapis.jsfexporter.api.IExportCell;
 import com.lapis.jsfexporter.api.IExportType;
 import com.lapis.jsfexporter.impl.ExportCellImpl;
 import com.lapis.jsfexporter.impl.ExportRowImpl;
-import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions.ExportRange;
 import com.lapis.jsfexporter.primefaces.util.PrimeFacesUtil;
 import com.lapis.jsfexporter.spi.IExportSource;
 import com.lapis.jsfexporter.util.ExportUtil;
@@ -89,7 +88,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		
 		List<List<String>> columnNames = exportFacet(FacetType.HEADER, source, columns, exporter, context);
 		
-		if (configOptions.getRange() == ExportRange.ALL) {
+		if (configOptions.getRange() == DataTableExportRange.ALL) {
 			if (source.isLazy()) {
 				int first = source.getFirst();
 				int rowCount = source.getRowCount();
