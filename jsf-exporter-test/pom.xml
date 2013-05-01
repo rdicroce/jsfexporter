@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>com.lapis.jsfexporter</groupId>
 		<artifactId>jsf-exporter-parent</artifactId>
@@ -10,6 +11,15 @@
 	</parent>
 	<artifactId>jsf-exporter-test</artifactId>
 	<packaging>war</packaging>
+	
+	<name>Lapis JSF Exporter - Test WAR</name>
+	<description>WAR for testing exporter changes</description>
+	<url>https://github.com/rdicroce/jsfexporter</url>
+	<scm>
+		<url>https://github.com/rdicroce/jsfexporter</url>
+		<connection>scm:git:git@github.com:rdicroce/jsfexporter.git</connection>
+		<developerConnection>scm:git:git@github.com:rdicroce/jsfexporter.git</developerConnection>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -60,4 +70,16 @@
 			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
 	</repositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

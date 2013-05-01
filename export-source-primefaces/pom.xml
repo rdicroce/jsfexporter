@@ -1,12 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>com.lapis.jsfexporter</groupId>
 		<artifactId>jsf-exporter-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>export-source-primefaces</artifactId>
+	<packaging>jar</packaging>
+	
+	<name>Lapis JSF Exporter - PrimeFaces export sources</name>
+	<description>Export source implementations for various PrimeFaces components</description>
+	<url>https://github.com/rdicroce/jsfexporter</url>
+	<scm>
+		<url>https://github.com/rdicroce/jsfexporter</url>
+		<connection>scm:git:git@github.com:rdicroce/jsfexporter.git</connection>
+		<developerConnection>scm:git:git@github.com:rdicroce/jsfexporter.git</developerConnection>
+	</scm>
 	
 	<dependencies>
 		<dependency>

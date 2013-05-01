@@ -1,10 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+	
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>jsf-exporter-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	
+	<name>Lapis JSF Exporter Parent</name>
+	<description>Parent POM for JSF Exporter modules</description>
+	<url>https://github.com/rdicroce/jsfexporter</url>
+	<inceptionYear>2013</inceptionYear>
+	<organization>
+		<name>Lapis Software Associates</name>
+		<url>http://www.lapis.com</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/rdicroce/jsfexporter</url>
+		<connection>scm:git:git@github.com:rdicroce/jsfexporter.git</connection>
+		<developerConnection>scm:git:git@github.com:rdicroce/jsfexporter.git</developerConnection>
+	</scm>
+	
+	<developers>
+		<developer>
+			<id>rdicroce</id>
+			<name>Richard DiCroce</name>
+			<email>rdicroce@lapis.com</email>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +56,7 @@
 		<module>../export-type-excel</module>
 		<module>../export-type-pdf</module>
 		<module>../export-type-xml</module>
+		<module>../jsf-exporter-test</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -146,6 +184,15 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+					<licenseName>apache_v2</licenseName>
 				</configuration>
 			</plugin>
 		</plugins>
