@@ -214,6 +214,14 @@
 						<tagNameFormat>@{project.version}</tagNameFormat>
 						<arguments>-Prelease</arguments>
 						<localCheckout>true</localCheckout>
+						<!--
+						Maven is trying to be smart and is instead being stupid.
+						When it attempts to push the tag, it does this:
+						[INFO] Executing: cmd.exe /X /C "git push ssh://git@github.com/rdicroce 1.0.0.Alpha1"
+						which obviously is not a valid repository.
+						So we'll push the changes and tag manually.
+						-->
+						<pushChanges>false</pushChanges>
 					</configuration>
 				</plugin>
 				<plugin>
