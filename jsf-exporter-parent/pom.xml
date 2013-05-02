@@ -30,8 +30,8 @@
 	</licenses>
 	<scm>
 		<url>https://github.com/rdicroce/jsfexporter</url>
-		<connection>scm:git:git@github.com:rdicroce/jsfexporter.git</connection>
-		<developerConnection>scm:git:git@github.com:rdicroce/jsfexporter.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/rdicroce/jsfexporter.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/rdicroce/jsfexporter.git</developerConnection>
 	</scm>
 	
 	<developers>
