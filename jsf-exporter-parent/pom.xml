@@ -211,6 +211,8 @@
 					<version>2.4.1</version>
 					<configuration>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<releaseProfiles>release</releaseProfiles>
+						<tagNameFormat>@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -233,7 +235,7 @@
 	
 	<profiles>
 		<profile>
-			<id>sonatype-oss-release</id>
+			<id>release</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -255,6 +257,43 @@
 								<id>generate-license-file</id>
 								<goals>
 									<goal>update-project-license</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
 								</goals>
 							</execution>
 						</executions>
