@@ -213,6 +213,7 @@
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<tagNameFormat>@{project.version}</tagNameFormat>
 						<arguments>-Prelease</arguments>
+						<localCheckout>true</localCheckout>
 					</configuration>
 				</plugin>
 				<plugin>
