@@ -211,8 +211,8 @@
 					<version>2.4.1</version>
 					<configuration>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<releaseProfiles>release</releaseProfiles>
 						<tagNameFormat>@{project.version}</tagNameFormat>
+						<arguments>-Prelease</arguments>
 					</configuration>
 				</plugin>
 				<plugin>
