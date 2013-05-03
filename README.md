@@ -65,7 +65,7 @@ Using the exporter isn't much different from using the original p:dataExporter.
 
 First, add the appropriate namespace to your markup:
 
-```
+```xml
 xmlns:l="http://www.lapis.com/jsf/exporter"
 ```
 
@@ -101,3 +101,6 @@ For more in-depth, working code examples, take a look at the jsf-exporter-test p
 ## Drawbacks vs. p:dataExporter
 - PDF and Excel export types don't support font options (yet)
 - No special handling for h/p:commandLink (yet)
+
+## License
+All code is licensed under Apache 2.0, so you can use this in commercial projects. You also aren't required to release any changes you make, but you are encouraged to do so.
