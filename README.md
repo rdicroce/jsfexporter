@@ -10,6 +10,7 @@ I finally got fed up with all the problems and limitations. I decided to roll my
 ## Current Features
 - Support for p:dataTable (including dynamic columns, lazy loading, and p:columnGroup)
 - Support for p:treeTable
+- Support for h:panelGrid
 - Output in CSV, XML, PDF, XLS, and XLSX file formats
 
 ## How To Get It
