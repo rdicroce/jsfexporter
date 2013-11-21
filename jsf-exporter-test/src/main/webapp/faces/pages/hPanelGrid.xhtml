@@ -40,9 +40,11 @@
 			</p:commandButton>
 		
 			<h:panelGrid id="grid" columns="3">
-				<h:outputText value="Foo1" />
-				<h:outputText value="Bar1" />
-				<h:outputText value="Baz1" />
+				<h:commandLink value="h:commandLink with no children" />
+				<h:commandLink>
+					<h:outputText value="h:commandLink with h:outputText" />
+				</h:commandLink>
+				<p:commandLink value="p:commandLink"/>
 				
 				<h:outputText value="Foo2" />
 				<h:outputText value="Bar2" />
