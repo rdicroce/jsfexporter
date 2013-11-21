@@ -1,3 +1,4 @@
 com.lapis.jsfexporter.impl.value.CommandLinkFormatter
 com.lapis.jsfexporter.impl.value.DefaultFormatter
+com.lapis.jsfexporter.impl.value.OutputFormatFormatter
 com.lapis.jsfexporter.impl.value.ValueHolderFormatter

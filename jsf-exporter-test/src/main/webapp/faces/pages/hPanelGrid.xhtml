@@ -46,7 +46,10 @@
 				</h:commandLink>
 				<p:commandLink value="p:commandLink"/>
 				
-				<h:outputText value="Foo2" />
+				<h:outputFormat value="This is a {0} of {1}">
+					<f:param value="test"/>
+					<f:param value="h:outputFormat"/>
+				</h:outputFormat>
 				<h:outputText value="Bar2" />
 				<h:outputText value="Baz2" />
 				
