@@ -27,16 +27,16 @@
 	<ui:define name="content">
 		<h:form>
 			<p:commandButton value="Export CSV" ajax="false">
-				<l:dataExporter source="table" fileType="csv" fileName="cars" sourceOptions="#{nonLazyTableBean.DTPageOnly}"/>
+				<l:dataExporter source="table" fileType="csv" fileName="cars" sourceOptions="#{nonLazyTableBean.PFDTPageOnly}"/>
 			</p:commandButton>
 			<p:commandButton value="Export XML" ajax="false">
-				<l:dataExporter source="table" fileType="xml" fileName="cars" sourceOptions="#{nonLazyTableBean.DTPageOnly}"/>
+				<l:dataExporter source="table" fileType="xml" fileName="cars" sourceOptions="#{nonLazyTableBean.PFDTPageOnly}"/>
 			</p:commandButton>
 			<p:commandButton value="Export PDF" ajax="false">
-				<l:dataExporter source="table" fileType="pdf" fileName="cars" sourceOptions="#{nonLazyTableBean.DTPageOnly}"/>
+				<l:dataExporter source="table" fileType="pdf" fileName="cars" sourceOptions="#{nonLazyTableBean.PFDTPageOnly}"/>
 			</p:commandButton>
 			<p:commandButton value="Export XLSX" ajax="false">
-				<l:dataExporter source="table" fileType="excel" fileName="cars"/>
+				<l:dataExporter source="table" fileType="excel" fileName="cars" sourceOptions="#{nonLazyTableBean.PFDTPageOnly}"/>
 			</p:commandButton>
 		
 			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}" rows="5" paginator="true">

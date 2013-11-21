@@ -10,6 +10,9 @@
         <dependent-module archiveName="export-source-primefaces-1.0.0.Alpha2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-primefaces/export-source-primefaces">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="export-source-richfaces-1.0.0.Alpha2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-richfaces/export-source-richfaces">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="export-type-csv-1.0.0.Alpha2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-csv/export-type-csv">
             <dependency-type>uses</dependency-type>
         </dependent-module>

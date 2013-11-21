@@ -53,8 +53,13 @@ public class NonLazyTableBean {
 		}
 	}
 	
-	public DataTableExportOptions getDTPageOnly() {
+	public DataTableExportOptions getPFDTPageOnly() {
 		return new DataTableExportOptions(DataTableExportRange.PAGE_ONLY);
+	}
+	
+	public com.lapis.jsfexporter.richfaces.datatable.DataTableExportOptions getRFDTPageOnly() {
+		return new com.lapis.jsfexporter.richfaces.datatable.DataTableExportOptions(
+				com.lapis.jsfexporter.richfaces.datatable.DataTableExportRange.PAGE_ONLY);
 	}
 	
 	public CSVExportOptions getCSVWithUTF8BOM() {

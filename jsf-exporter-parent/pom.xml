@@ -47,11 +47,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<version.org.apache.poi>3.9</version.org.apache.poi>
+		<version.org.richfaces>4.3.4.Final</version.org.richfaces>
 	</properties>
 	
 	<modules>
 		<module>../jsf-exporter-core</module>
 		<module>../export-source-primefaces</module>
+		<module>../export-source-richfaces</module>
 		<module>../export-type-csv</module>
 		<module>../export-type-excel</module>
 		<module>../export-type-pdf</module>
@@ -69,6 +71,11 @@
 			<dependency>
 				<groupId>com.lapis.jsfexporter</groupId>
 				<artifactId>export-source-primefaces</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lapis.jsfexporter</groupId>
+				<artifactId>export-source-richfaces</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -159,6 +166,16 @@
 				<groupId>org.primefaces</groupId>
 				<artifactId>primefaces</artifactId>
 				<version>4.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.core</groupId>
+				<artifactId>richfaces-core-impl</artifactId>
+				<version>${version.org.richfaces}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.ui</groupId>
+				<artifactId>richfaces-components-ui</artifactId>
+				<version>${version.org.richfaces}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
