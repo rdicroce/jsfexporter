@@ -21,11 +21,8 @@ package com.lapis.jsfexporter.primefaces.datatable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -47,15 +44,6 @@ import com.lapis.jsfexporter.util.ExportUtil;
 
 public class DataTableExportSource implements IExportSource<DataTable, DataTableExportOptions> {
 
-	private static final Map<FacetType, List<String>> FACET_NAMES;
-	
-	static {
-		Map<FacetType, List<String>> facetNamesTemp = new HashMap<FacetType, List<String>>();
-		facetNamesTemp.put(FacetType.HEADER, Collections.unmodifiableList(Arrays.asList("header")));
-		facetNamesTemp.put(FacetType.FOOTER, Collections.unmodifiableList(Arrays.asList("footer")));
-		FACET_NAMES = facetNamesTemp;
-	}
-	
 	@Override
 	public Class<DataTable> getSourceType() {
 		return DataTable.class;
@@ -133,9 +121,9 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 			}
 			if (hasFacet) {
 				for (List<String> columnName : columnNames) {
-					facetCells.add(new ExportCellImpl(FACET_NAMES.get(facetType), columnName.get(0), 1, 1));
+					facetCells.add(new ExportCellImpl(Arrays.asList(facetType.getFacetName()), columnName.get(0), 1, 1));
 				}
-				exporter.exportRow(new ExportRowImpl(FACET_NAMES.get(facetType), null, facetType, facetCells));
+				exporter.exportRow(new ExportRowImpl(Arrays.asList(facetType.getFacetName()), null, facetType, facetCells));
 			}
 		} else if (columnGroup.getChildCount() > 0) {
 			int rowCount = columnGroup.getChildCount();
@@ -171,10 +159,10 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 						columnIndex++;
 					}
 					
-					facetCells.add(new ExportCellImpl(FACET_NAMES.get(facetType), facetText, rowColumn.getColspan(), rowColumn.getRowspan()));
+					facetCells.add(new ExportCellImpl(Arrays.asList(facetType.getFacetName()), facetText, rowColumn.getColspan(), rowColumn.getRowspan()));
 				}
 				
-				exporter.exportRow(new ExportRowImpl(FACET_NAMES.get(facetType), null, facetType, facetCells));
+				exporter.exportRow(new ExportRowImpl(Arrays.asList(facetType.getFacetName()), null, facetType, facetCells));
 				facetCells.clear();
 			}
 		}
