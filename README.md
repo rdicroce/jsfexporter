@@ -8,10 +8,24 @@ This project was born out of frustration with the PrimeFaces dataExporter compon
 I finally got fed up with all the problems and limitations. I decided to roll my own, and make the result available to anyone else who's in the same boat. Feedback is welcome, as are pull requests.
 
 ## Current Features
-- Support for p:dataTable (including dynamic columns, lazy loading, and p:columnGroup)
-- Support for p:treeTable
-- Support for h:panelGrid
-- Output in CSV, XML, PDF, XLS, and XLSX file formats
+- Supports exporting data from the following components:
+  - h:panelGrid
+  - h:dataTable
+  - rich:dataTable
+  - p:dataTable (including dynamic columns, lazy loading, and p:columnGroup)
+  - p:treeTable
+  - p:dataList
+- Has special formatting support for the following components:
+  - h/p:commandLink
+  - h:outputFormat
+  - h:panelGroup
+  - p:cellEditor
+  - and others
+- Supports exporting data to the following file formats:
+  - CSV
+  - XML
+  - PDF
+  - XLS/XLSX
 
 ## How To Get It
 The artifacts are all in Maven Central, so you just need to add them to your POM.
@@ -22,42 +36,47 @@ First, you'll need the exporter core:
 <dependency>
   <groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>jsf-exporter-core</artifactId>
-	<version>1.0.0.Alpha1</version>
+	<version>1.0.0.Final</version>
 </dependency>
 ```
 
-Next, you'll need at least one export source module:
-
-```xml
-<dependency>
-	<groupId>com.lapis.jsfexporter</groupId>
-	<artifactId>export-source-primefaces</artifactId>
-	<version>1.0.0.Alpha1</version>
-</dependency>
-```
-
-Finally, you'll need at least one export type module:
+Next, you'll need at least one export type module:
 
 ```xml
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-csv</artifactId>
-	<version>1.0.0.Alpha1</version>
+	<version>1.0.0.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-excel</artifactId>
-	<version>1.0.0.Alpha1</version>
+	<version>1.0.0.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-pdf</artifactId>
-	<version>1.0.0.Alpha1</version>
+	<version>1.0.0.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-xml</artifactId>
-	<version>1.0.0.Alpha1</version>
+	<version>1.0.0.Final</version>
+</dependency>
+```
+
+Finally, you may need an export source module, depending on which component library you're using:
+
+```xml
+<dependency>
+	<groupId>com.lapis.jsfexporter</groupId>
+	<artifactId>export-source-primefaces</artifactId>
+	<version>1.0.0.Final</version>
+</dependency>
+<dependency>
+	<groupId>com.lapis.jsfexporter</groupId>
+	<artifactId>export-source-richfaces</artifactId>
+	<version>1.0.0.Final</version>
 </dependency>
 ```
 
@@ -98,10 +117,6 @@ For more in-depth, working code examples, take a look at the jsf-exporter-test p
   - Each export type is a separate Maven artifact with properly-defined transitive dependencies. No more manually adding iText or Apache POI to your POM.
   - XML export type automatically sanitizes tag names, instead of producing invalid XML.
   - Excel export type can produce XLSX files in addition to the older XLS format.
-
-## Drawbacks vs. p:dataExporter
-- PDF and Excel export types don't support font options (yet)
-- No special handling for h/p:commandLink (yet)
 
 ## License
 All code is licensed under Apache 2.0, so you can use this in commercial projects. You also aren't required to release any changes you make, but you are encouraged to do so.
