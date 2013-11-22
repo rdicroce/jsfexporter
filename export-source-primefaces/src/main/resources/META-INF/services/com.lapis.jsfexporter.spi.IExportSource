@@ -1,2 +1,3 @@
+com.lapis.jsfexporter.primefaces.datalist.DataListExportSource
 com.lapis.jsfexporter.primefaces.datatable.DataTableExportSource
 com.lapis.jsfexporter.primefaces.treetable.TreeTableExportSource

@@ -29,6 +29,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.lapis.jsfexporter.csv.CSVExportOptions;
+import com.lapis.jsfexporter.primefaces.datalist.DataListExportOptions;
+import com.lapis.jsfexporter.primefaces.datalist.DataListExportRange;
 import com.lapis.jsfexporter.primefaces.datatable.DataTableExportOptions;
 import com.lapis.jsfexporter.primefaces.datatable.DataTableExportRange;
 
@@ -60,6 +62,10 @@ public class NonLazyTableBean {
 	public com.lapis.jsfexporter.richfaces.datatable.DataTableExportOptions getRFDTPageOnly() {
 		return new com.lapis.jsfexporter.richfaces.datatable.DataTableExportOptions(
 				com.lapis.jsfexporter.richfaces.datatable.DataTableExportRange.PAGE_ONLY);
+	}
+	
+	public DataListExportOptions getPFDLPageOnly() {
+		return new DataListExportOptions(DataListExportRange.PAGE_ONLY);
 	}
 	
 	public CSVExportOptions getCSVWithUTF8BOM() {
