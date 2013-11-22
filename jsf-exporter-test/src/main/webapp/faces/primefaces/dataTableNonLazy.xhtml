@@ -39,7 +39,7 @@
 				<l:dataExporter source="table" fileType="excel" fileName="cars"/>
 			</p:commandButton>
 		
-			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}">
+			<p:dataTable id="table" var="car" value="#{nonLazyTableBean.cars}" editable="true">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Make (i.e. Manufacturer)" />
@@ -50,10 +50,34 @@
 					<h:outputText value="#{car.color}" />
 				</p:column>
 				<p:column headerText="Year">
-					<h:outputText value="#{car.year}" />
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{car.year}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{car.year}">
+								<f:validateLongRange minimum="1900"/>
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
 				</p:column>
 				<p:column headerText="Price">
-					<h:outputText value="#{car.price}" />
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:panelGroup>
+								<h:outputText value="$" />
+								<h:outputText value="#{car.price}" />
+							</h:panelGroup>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{car.price}">
+								<f:validateLongRange minimum="1"/>
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Actions" exportable="false">
+					<p:rowEditor/>
 				</p:column>
 			</p:dataTable>
 		</h:form>
