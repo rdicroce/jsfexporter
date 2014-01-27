@@ -4,25 +4,25 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="jsf-exporter-core-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jsf-exporter-core/jsf-exporter-core">
+        <dependent-module archiveName="jsf-exporter-core-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jsf-exporter-core/jsf-exporter-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-source-primefaces-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-primefaces/export-source-primefaces">
+        <dependent-module archiveName="export-source-primefaces-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-primefaces/export-source-primefaces">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-source-richfaces-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-richfaces/export-source-richfaces">
+        <dependent-module archiveName="export-source-richfaces-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-source-richfaces/export-source-richfaces">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-type-csv-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-csv/export-type-csv">
+        <dependent-module archiveName="export-type-csv-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-csv/export-type-csv">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-type-excel-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-excel/export-type-excel">
+        <dependent-module archiveName="export-type-excel-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-excel/export-type-excel">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-type-pdf-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-pdf/export-type-pdf">
+        <dependent-module archiveName="export-type-pdf-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-pdf/export-type-pdf">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="export-type-xml-1.0.1.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-xml/export-type-xml">
+        <dependent-module archiveName="export-type-xml-1.0.2.Final-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/export-type-xml/export-type-xml">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="jsf-exporter-test"/>
