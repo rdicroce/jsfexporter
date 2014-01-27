@@ -90,6 +90,8 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 					exportRowCells(source, columns, columnNames, i * rowsPerPage, (i + 1) * rowsPerPage, exporter, context);
 				}
 				if (finalPass > 0) {
+					source.setFirst(passes * rowsPerPage);
+					source.loadLazyData();
 					exportRowCells(source, columns, columnNames, passes * rowsPerPage, (passes * rowsPerPage) + finalPass, exporter, context);
 				}
 				

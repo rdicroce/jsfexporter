@@ -71,6 +71,8 @@ public class DataListExportSource implements IExportSource<DataList, DataListExp
 					exportRow(source, i * rowsPerPage, (i + 1) * rowsPerPage, exporter, context);
 				}
 				if (finalPass > 0) {
+					source.setFirst(passes * rowsPerPage);
+					source.loadLazyData();
 					exportRow(source, passes * rowsPerPage, (passes * rowsPerPage) + finalPass, exporter, context);
 				}
 				

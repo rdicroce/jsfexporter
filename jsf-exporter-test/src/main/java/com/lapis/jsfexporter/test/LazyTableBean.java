@@ -69,11 +69,7 @@ public class LazyTableBean {
 		
 		@Override
 		public List<Car> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String, String> filters) {
-			if (first + pageSize >= cars.size()) {
-				return cars.subList(first, cars.size() - 1);
-			} else {
-				return cars.subList(first, first + pageSize);
-			}
+			return cars.subList(first, Math.min(cars.size(), first + pageSize));
 		}
 
 		@Override

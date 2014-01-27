@@ -39,7 +39,9 @@
 				<l:dataExporter source="table" fileType="excel" fileName="cars"/>
 			</p:commandButton>
 		
-			<p:dataTable id="table" var="car" value="#{lazyTableBean.model}" rows="10" paginator="true" lazy="true">
+			<p:dataTable id="table" var="car" value="#{lazyTableBean.model}" lazy="true" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Make (i.e. Manufacturer)" />
