@@ -36,7 +36,7 @@ First, you'll need the exporter core:
 <dependency>
   <groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>jsf-exporter-core</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 ```
 
@@ -46,22 +46,22 @@ Next, you'll need at least one export type module:
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-csv</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-excel</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-pdf</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-type-xml</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 ```
 
@@ -71,12 +71,12 @@ Finally, you may need an export source module, depending on which component libr
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-source-primefaces</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 <dependency>
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>export-source-richfaces</artifactId>
-	<version>1.0.1.Final</version>
+	<version>1.0.2.Final</version>
 </dependency>
 ```
 
