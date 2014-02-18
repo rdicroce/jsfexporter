@@ -50,7 +50,9 @@
 					<f:param value="test"/>
 					<f:param value="h:outputFormat"/>
 				</h:outputFormat>
-				<h:outputText value="Bar2" />
+				<h:selectOneMenu value="#{panelGridBean.selectedChoice}">
+					<f:selectItems value="#{panelGridBean.selectOneChoices}" var="choice" itemLabel="#{choice.label}"/>
+				</h:selectOneMenu>
 				<h:outputText value="Baz2" />
 				
 				<h:outputText value="Foo3" />
