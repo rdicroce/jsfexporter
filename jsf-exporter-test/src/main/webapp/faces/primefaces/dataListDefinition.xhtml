@@ -42,7 +42,7 @@
 			<p:dataList id="list" var="car" value="#{nonLazyTableBean.cars}" type="definition">
 				<h:outputText value="#{car.make}, #{car.year}" />
 				<f:facet name="description">
-					<h:outputText value="#{car.color}, #{car.price}" />
+					<h:outputText value="#{car.color}, #{nonLazyTableBean.formatPrize(car.price)}" />
 				</f:facet>
 			</p:dataList>
 		</h:form>

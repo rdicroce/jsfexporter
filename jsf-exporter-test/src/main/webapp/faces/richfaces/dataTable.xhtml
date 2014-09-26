@@ -63,7 +63,7 @@
 					<f:facet name="header">
 						<h:outputText value="Price" />
 					</f:facet>
-					<h:outputText value="#{car.price}" />
+					<h:outputText value="#{nonLazyTableBean.formatPrize(car.price)}" />
 				</rich:column>
 			</rich:dataTable>
 		</h:form>
