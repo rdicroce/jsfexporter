@@ -19,6 +19,7 @@
  */
 package com.lapis.jsfexporter.impl.value;
 
+import javax.el.PropertyNotFoundException;
 import javax.el.ValueExpression;
 import javax.faces.component.EditableValueHolder;
 import javax.faces.component.UIComponent;
@@ -56,11 +57,16 @@ public class ValueHolderFormatter implements IValueFormatter<ValueHolder> {
 		if (converter == null) { // no converter defined, try to find an appropriate one
 			ValueExpression expr = component.getValueExpression("value");
 			if (expr != null) {
-				Class<?> valueType = expr.getType(context.getELContext());
-				if (valueType != null) {
-					converter = context.getApplication().createConverter(valueType);
-				}
-			}
+
+                try {
+                    Class<?> valueType = expr.getType(context.getELContext());
+                    if (valueType != null) {
+                        converter = context.getApplication().createConverter(valueType);
+                    }
+                } catch (PropertyNotFoundException e) {
+                    //EL being evaluated is not a property, but a method
+                }
+            }
 		}
 		
 		if (converter == null) { // no converter defined and couldn't find one

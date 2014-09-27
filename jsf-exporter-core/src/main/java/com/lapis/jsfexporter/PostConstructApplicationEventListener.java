@@ -36,13 +36,14 @@ public class PostConstructApplicationEventListener implements SystemEventListene
 	
 	@Override
 	public void processEvent(SystemEvent event) throws AbortProcessingException {
-		Properties mavenProps = new Properties();
-		try {
-			mavenProps.load(getClass().getResourceAsStream("/META-INF/maven/com.lapis.jsfexporter/jsf-exporter-core/pom.properties"));
-		} catch (IOException e) {
-			L.warn("Failed to read exporter version", e);
-		}
-		L.info("Lapis JSF Exporter version {}", mavenProps.getProperty("version"));
+//		Properties mavenProps = new Properties();
+//		try {
+//todo cannot find this resource -> NullPointerException => server cannot start at all (which is quite unfortunate...)
+//           mavenProps.load(getClass().getResourceAsStream("/META-INF/maven/com.lapis.jsfexporter/jsf-exporter-core/pom.properties"));
+//		} catch (IOException e) {
+//			L.warn("Failed to read exporter version", e);
+//		}
+//		L.info("Lapis JSF Exporter version {}", mavenProps.getProperty("version"));
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExportTypeFactoryFactory.initialize(context);

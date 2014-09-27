@@ -61,21 +61,44 @@
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="Price">
-					<p:cellEditor>
-						<f:facet name="output">
-							<h:panelGroup>
-								<h:outputText value="$" />
-								<h:outputText value="#{car.price}" />
-							</h:panelGroup>
-						</f:facet>
-						<f:facet name="input">
-							<p:inputText value="#{car.price}">
-								<f:validateLongRange minimum="1"/>
-							</p:inputText>
-						</f:facet>
-					</p:cellEditor>
-				</p:column>
+                <p:column headerText="Price">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:panelGroup>
+                                <h:outputText value="$"/>
+                                <h:outputText value="#{nonLazyTableBean.formatPrize(car.price)}"/>
+                            </h:panelGroup>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.price}">
+                                <f:validateLongRange minimum="1"/>
+                            </p:inputText>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Price (Eur)">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:panelGroup>
+                                <h:outputText value="#{nonLazyTableBean.formatPrize(car.price)}" converter="com.lapis.jsfexporter.CurrencyConverter"/>
+                            </h:panelGroup>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.price}">
+                                <f:validateLongRange minimum="1"/>
+                            </p:inputText>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Button">
+                    <p:commandButton value="Click me!"/>
+                </p:column>
+                <p:column headerText="Image - HTML" style="text-align: center;">
+                    <h:graphicImage library="images" name="image.png" alt="this is image's alt"/>
+                </p:column>
+                <p:column headerText="Image - Primefaces" style="text-align: center;">
+                    <p:graphicImage library="images" name="image2.gif"  alt="this is second image's alt"/>
+                </p:column>
 				<p:column headerText="Actions" exportable="false">
 					<p:rowEditor/>
 				</p:column>

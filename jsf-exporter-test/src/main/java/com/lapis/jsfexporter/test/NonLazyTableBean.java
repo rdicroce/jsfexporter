@@ -74,6 +74,12 @@ public class NonLazyTableBean {
 		return options;
 	}
 
+
+    public String formatPrize(BigDecimal prize){
+        //adds comma after each triplet, eg. 12345 -> 12,345
+        return prize.toString().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+    }
+
 	public List<Car> getCars() {
 		return cars;
 	}

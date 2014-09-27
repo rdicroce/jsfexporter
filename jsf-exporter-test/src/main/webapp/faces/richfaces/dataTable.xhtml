@@ -18,13 +18,13 @@
   #L%
   -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:l="http://www.lapis.com/jsf/exporter"
-	template="../template.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:l="http://www.lapis.com/jsf/exporter" xmlns:a4j="http://richfaces.org/a4j"
+                template="../template.xhtml">
 	<ui:define name="content">
 		<h:form>
 			<p:commandButton value="Export CSV" ajax="false">
@@ -63,8 +63,20 @@
 					<f:facet name="header">
 						<h:outputText value="Price" />
 					</f:facet>
-					<h:outputText value="#{car.price}" />
+					<h:outputText value="#{nonLazyTableBean.formatPrize(car.price)}" />
 				</rich:column>
+                <rich:column>
+					<f:facet name="header">
+						<h:outputText value="Command link in cell" />
+					</f:facet>
+                        <a4j:commandLink value="yes" />
+				</rich:column>
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputText value="button" />
+                    </f:facet>
+                    <h:commandButton value="Click me!" />
+                </rich:column>
 			</rich:dataTable>
 		</h:form>
 	</ui:define>
