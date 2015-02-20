@@ -187,7 +187,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 			for (int j = 0; j < columnCount; j++) {
 				UIColumn column = columns.get(j);
 				if (column instanceof DynamicColumn) {
-					((DynamicColumn) column).applyModel();
+					((DynamicColumn) column).applyStatelessModel();
 				}
 				
 				cells.add(new ExportCellImpl(columnNames.get(j), ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1));
