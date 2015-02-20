@@ -47,7 +47,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<version.org.apache.poi>3.11</version.org.apache.poi>
-		<version.org.richfaces>4.3.4.Final</version.org.richfaces>
 	</properties>
 	
 	<modules>
