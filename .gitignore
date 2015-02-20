@@ -5,6 +5,11 @@ bin/
 *.jsfdia
 *.log
 
+.settings/
+.classpath
+.factorypath
+.project
+
 .idea
 *.iml
 *.iws
