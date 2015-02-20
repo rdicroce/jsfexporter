@@ -19,19 +19,19 @@
  */
 package com.lapis.jsfexporter.impl.value;
 
+import javax.faces.component.UICommand;
 import javax.faces.component.UIComponent;
 import javax.faces.component.ValueHolder;
-import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.context.FacesContext;
 
 import com.lapis.jsfexporter.spi.IValueFormatter;
 import com.lapis.jsfexporter.util.ExportUtil;
 
-public class CommandLinkFormatter implements IValueFormatter<HtmlCommandLink> {
+public class UICommandFormatter implements IValueFormatter<UICommand> {
 
 	@Override
-	public Class<HtmlCommandLink> getSupportedClass() {
-		return HtmlCommandLink.class;
+	public Class<UICommand> getSupportedClass() {
+		return UICommand.class;
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CommandLinkFormatter implements IValueFormatter<HtmlCommandLink> {
 	}
 
 	@Override
-	public String formatValue(FacesContext context, HtmlCommandLink component) {
+	public String formatValue(FacesContext context, UICommand component) {
 		// adapted from PrimeFaces exporter
 		Object value = component.getValue();
 		if (value == null) {

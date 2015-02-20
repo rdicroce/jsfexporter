@@ -22,6 +22,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:l="http://www.lapis.com/jsf/exporter"
 	template="../template.xhtml">
 	<ui:define name="content">
@@ -53,9 +54,10 @@
 				<h:selectOneMenu value="#{panelGridBean.selectedChoice}">
 					<f:selectItems value="#{panelGridBean.selectOneChoices}" var="choice" itemLabel="#{choice.label}"/>
 				</h:selectOneMenu>
-				<h:outputText value="Baz2" />
+				<p:commandButton value="p:commandButton"/>
 				
-				<h:outputText value="Foo3" />
+				<a4j:commandButton value="a4j:commandButton"/>
+				<a4j:commandLink value="a4j:commandLink"/>
 			</h:panelGrid>
 		</h:form>
 	</ui:define>
