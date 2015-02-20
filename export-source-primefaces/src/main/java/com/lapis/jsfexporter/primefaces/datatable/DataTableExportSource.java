@@ -56,23 +56,12 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 	
 	@Override
 	public int getColumnCount(DataTable source, DataTableExportOptions configOptions) {
-		int columnCount = 0;
-		for (UIComponent kid : source.getChildren()) {
-			if (kid instanceof UIColumn && kid.isRendered() && ((UIColumn) kid).isExportable()) {
-				columnCount++;
-			}
-		}
-		return columnCount;
+		return getColumnsForExport(source).size();
 	}
 
 	@Override
 	public void exportData(DataTable source, DataTableExportOptions configOptions, IExportType<?, ?, ?> exporter, FacesContext context) throws Exception {
-		List<UIColumn> columns = new ArrayList<UIColumn>();
-		for (UIComponent kid : source.getChildren()) {
-			if (kid instanceof UIColumn && kid.isRendered() && ((UIColumn) kid).isExportable()) {
-				columns.add((UIColumn) kid);
-			}
-		}
+		List<UIColumn> columns = getColumnsForExport(source);
 		
 		List<List<String>> columnNames = exportFacet(FacetType.HEADER, source, columns, exporter, context);
 		
@@ -107,6 +96,16 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		exportFacet(FacetType.FOOTER, source, columns, exporter, context);
 	}
 	
+	private List<UIColumn> getColumnsForExport(DataTable source) {
+		List<UIColumn> columns = new ArrayList<UIColumn>();
+		for (UIColumn kid : source.getColumns()) {
+			if (kid.isRendered() && kid.isExportable()) {
+				columns.add(kid);
+			}
+		}
+		return columns;
+	}
+	
 	private List<List<String>> exportFacet(FacetType facetType, DataTable source, List<UIColumn> columns, IExportType<?, ?, ?> exporter, FacesContext context) {
 		List<List<String>> columnNames = new ArrayList<List<String>>();
 		List<IExportCell> facetCells = new ArrayList<IExportCell>();
@@ -115,6 +114,7 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 		if (columnGroup == null) {
 			boolean hasFacet = false;
 			for (UIColumn column : columns) {
+				handleDynamicColumn(column);
 				String facetText = PrimeFacesUtil.getColumnFacetText(column, facetType, context);
 				if (facetText != null) {
 					hasFacet = true;
@@ -185,17 +185,20 @@ public class DataTableExportSource implements IExportSource<DataTable, DataTable
 			source.setRowIndex(i);
 			
 			for (int j = 0; j < columnCount; j++) {
-				UIColumn column = columns.get(j);
-				if (column instanceof DynamicColumn) {
-					((DynamicColumn) column).applyStatelessModel();
-				}
-				
-				cells.add(new ExportCellImpl(columnNames.get(j), ExportUtil.transformComponentsToString(context, column.getChildren()), 1, 1));
+				cells.add(new ExportCellImpl(columnNames.get(j),
+						ExportUtil.transformComponentsToString(context, handleDynamicColumn(columns.get(j)).getChildren()), 1, 1));
 			}
 			
 			exporter.exportRow(new ExportRowImpl(rowName, null, null, cells));
 			cells.clear();
 		}
+	}
+	
+	private UIColumn handleDynamicColumn(UIColumn column) {
+		if (column instanceof DynamicColumn) {
+			((DynamicColumn) column).applyStatelessModel();
+		}
+		return column;
 	}
 
 }

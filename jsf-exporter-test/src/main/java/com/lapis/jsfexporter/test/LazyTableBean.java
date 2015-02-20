@@ -68,12 +68,12 @@ public class LazyTableBean {
 		}
 		
 		@Override
-		public List<Car> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String, String> filters) {
+		public List<Car> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String, Object> filters) {
 			return cars.subList(first, Math.min(cars.size(), first + pageSize));
 		}
 
 		@Override
-		public List<Car> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
+		public List<Car> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 			return load(first, pageSize, null, filters);
 		}
 
