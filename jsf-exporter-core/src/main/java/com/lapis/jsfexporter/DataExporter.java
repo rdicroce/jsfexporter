@@ -163,7 +163,7 @@ public class DataExporter implements ActionListener, StateHolder {
 		 * See RFC 6266 and http://greenbytes.de/tech/tc2231/
 		 */
 		String encodedFileName = URLEncoder.encode(fileName.getValue(elContext) + "." + exportType.getFileExtension(), "UTF-8");
-		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"; filename*=UTF8''" + encodedFileName);
+		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"; filename*=UTF-8''" + encodedFileName);
 		
 		// write the response and signal JSF that we're done
 		exportType.writeExport(externalContext);
