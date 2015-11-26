@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
-	
+
 	<groupId>com.lapis.jsfexporter</groupId>
 	<artifactId>jsf-exporter-parent</artifactId>
 	<version>1.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
+
 	<name>Lapis JSF Exporter Parent</name>
 	<description>Parent POM for JSF Exporter modules</description>
 	<url>https://github.com/rdicroce/jsfexporter</url>
@@ -31,9 +31,9 @@
 		<url>https://github.com/rdicroce/jsfexporter</url>
 		<connection>scm:git:ssh://git@github.com/rdicroce/jsfexporter.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/rdicroce/jsfexporter.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
-	
+		<tag>HEAD</tag>
+	</scm>
+
 	<developers>
 		<developer>
 			<id>rdicroce</id>
@@ -42,24 +42,25 @@
 			<timezone>-5</timezone>
 		</developer>
 	</developers>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<version.org.apache.poi>3.11</version.org.apache.poi>
 	</properties>
-	
+
 	<modules>
 		<module>../jsf-exporter-core</module>
 		<module>../export-source-primefaces</module>
 		<module>../export-source-richfaces</module>
 		<module>../export-type-csv</module>
 		<module>../export-type-excel</module>
+		<module>../export-type-word</module>
 		<module>../export-type-pdf</module>
 		<module>../export-type-xml</module>
 		<module>../jsf-exporter-test</module>
 	</modules>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -97,7 +98,7 @@
 				<artifactId>export-type-xml</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.sun.faces</groupId>
 				<artifactId>jsf-api</artifactId>
@@ -117,7 +118,7 @@
 				<type>pom</type>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.lowagie</groupId>
 				<artifactId>itext</artifactId>
@@ -183,7 +184,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -196,7 +197,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -250,7 +251,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>release</id>

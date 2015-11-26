@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.lapis.jsfexporter</groupId>
+        <artifactId>jsf-exporter-parent</artifactId>
+        <version>1.0.4-SNAPSHOT</version>
+        <relativePath>../jsf-exporter-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>export-type-word</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Lapis JSF Exporter - Word export type</name>
+    <description>DOC/DOCX export type implementation</description>
+    <url>https://github.com/rdicroce/jsfexporter</url>
+    <scm>
+        <url>https://github.com/rdicroce/jsfexporter</url>
+        <connection>scm:git:git@github.com:rdicroce/jsfexporter.git</connection>
+        <developerConnection>scm:git:git@github.com:rdicroce/jsfexporter.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lapis.jsfexporter</groupId>
+            <artifactId>jsf-exporter-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
